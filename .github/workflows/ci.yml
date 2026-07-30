@@ -18,8 +18,8 @@ jobs:
         with: { python-version: "${{ matrix.python }}" }
       # Installed WITHOUT extras and with no env vars set, because "works on a
       # stranger's machine with nothing configured" is the actual contract.
-      - run: pip install ./packages/prose-tells ./packages/llm-run-guard pytest
-      - run: python -m pytest packages/prose-tells/tests packages/llm-run-guard/tests -q
+      - run: pip install ./packages/prose-tells ./packages/llm-run-guard ./packages/edit-digest pytest
+      - run: python -m pytest packages/*/tests -q
       - name: CLI smoke test in a bare environment
         run: |
           env -i "$(which prose-tells)" --version

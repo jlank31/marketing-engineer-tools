@@ -1,5 +1,7 @@
 # marketing-engineer-tools
 
+![Marketing tooling](docs/assets/marketing-dashboard.jpeg)
+
 Free tools for people who publish a lot and can't afford for it to read like a robot wrote it.
 
 Everything here was pulled out of a content pipeline that has shipped work for real clients, every single week, since April 2026. None of it is theoretical. Each guardrail exists because something went wrong once and I didn't want it to happen twice.
@@ -33,10 +35,11 @@ pip install prose-tells
 prose-tells scan your-draft.md
 ```
 
-Building on the Claude API instead? The other package is one line:
+The other two packages:
 
 ```bash
-pip install "llm-run-guard[anthropic]"
+pip install "llm-run-guard[anthropic]"   # real API cost tracking + a budget cap
+pip install edit-digest                  # learn an editor's style from their edits
 ```
 
 You'll get a list like this, quoting your own lines back at you:
@@ -87,8 +90,8 @@ expect a writeup on the thinking behind each one.
 | 4 | Aug 26 | **CLAUDE.md Upgrader** + **Project Overlay** | **Ready** | Two tools for anyone using an AI coding assistant. One rewrites your project's instruction file so the AI behaves like a teammate. The other writes a permanent cheat sheet so it stops re-learning your project every session. **Use them** if you've ever answered the same question from your AI twice. |
 | 5 | Sep 2 | [**llm-run-guard**](packages/llm-run-guard) | **Ready** | A spend meter and an emergency brake for anyone building on the Claude API. Most cost tracking is quietly wrong: it misses cached tokens, misses web search charges, and reports $0 for any model it doesn't recognize, which silently switches off your budget cap. **Use it** if you've ever been surprised by an API bill. |
 | 6 | Sep 9 | **llm-run-guard: self-healing** | **Ready** | The layer that keeps an AI pipeline running while you sleep. Retries failures, repairs malformed AI output, and escalates to a smarter model as a last resort. It also counts whether those expensive rescue calls were worth it, which most people never check. **Use it** on anything that runs unattended. |
-| 7 | Sep 16 | **edit-digest** | Building | Learns your editor's style from their edits. Feed it before-and-after pairs and it tells you the pattern: *Write "brands", not "vendors" (7x). Cut "very" (5x), the editor removes it every time.* Paste that into your AI prompt and the drafts stop repeating the mistakes. Costs nothing to run, no API call. **Use it** monthly and watch your drafts need less editing each cycle. |
-| 8 | Sep 23 | **The AEO Retractions** + **B2B Email Sequences** | Building | An essay retracting 3 SEO rules I taught clients and now know are wrong, with every remaining rule labeled Confirmed, Plausible, or Folklore. Plus 7 complete B2B email sequences and a brand-voice checker. **Use it** to stop doing 3 things that don't work, and to skip the blank page on your next campaign. |
+| 7 | Sep 16 | [**edit-digest**](packages/edit-digest) | **Ready** | Learns your editor's style from their edits. Feed it before-and-after pairs and it tells you the pattern: *Write "brands", not "vendors" (7x). Cut "very" (5x), the editor removes it every time.* Paste that into your AI prompt and the drafts stop repeating the mistakes. Costs nothing to run, no API call. **Use it** monthly and watch your drafts need less editing each cycle. |
+| 8 | Sep 23 | [**The AEO Retractions**](docs/essays/aeo-retractions.md) | **Ready** | An essay retracting 3 SEO rules I taught clients and now know are wrong, with every remaining rule labeled Confirmed, Plausible, or Folklore. **Use it** to stop doing 3 things that don't work, and to set honest expectations before someone quotes you a traffic number that doesn't survive checking. |
 
 ### Bonus tools
 
