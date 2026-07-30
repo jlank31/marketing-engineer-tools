@@ -81,9 +81,7 @@ github.com/jlank31/marketing-engineer-tools
 
 ## Drop 3 — Wed Aug 19, 3:45pm ET
 
-Complaining about a draft is easy. Fixing it is the boring part.
-
-Drop 3 does the boring part.
+Complaining about a draft is easy. Fixing it is the boring part, so most tools skip it.
 
 4 rewrites that should never be done by hand:
 
@@ -95,9 +93,7 @@ Drop 3 does the boring part.
 
 That last part is the trick. Deleting a word is trivial. Not leaving a doubled space, an orphaned comma, or a lowercase sentence start is what makes it usable on a finished draft.
 
-It ships as a GitHub check too, so if your team keeps content in a repo every content PR gets flagged before a human reads it.
-
-It won't make writing good. Clean output is a floor.
+It won't make writing good. Clean output is a floor, not a finished piece.
 
 pip install prose-tells
 
@@ -131,19 +127,21 @@ github.com/jlank31/marketing-engineer-tools
 
 ## Drop 5 — Wed Sep 2, 3:45pm ET
 
-Your Claude API cost tracking is probably wrong. Mine was.
+Your Claude API cost tracking is probably wrong. Mine was, for months.
 
 3 quiet reasons:
 
-> Cached tokens bill at 1.25x to write, 0.10x to read, and the API reports them SEPARATELY from input_tokens. Skip that, understate every cached call.
+> Cached tokens bill at 1.25x to write and 0.10x to read, and the API reports them SEPARATELY from input_tokens. Skip that, understate every cached call.
 > Server-side web search costs $10 per 1,000 requests, on top of tokens.
 > Unknown model IDs. Most trackers return $0 for a model they don't know, so a new model version is invisible to your budget cap.
 
-That third one is dangerous. Mine used to return 0.0, so a model missing from the price table silently bypassed the cost cap.
+That third one is dangerous. Mine returned 0.0, so a model missing from the price table silently bypassed the cap.
 
-It now falls back to the most expensive tier and warns once per process. Overstate, never understate.
+It now falls back to the most expensive tier. Overstate, never understate.
 
-Swap one line: Anthropic() becomes TrackedClient(). You get real per-run cost, and a run that blows its budget dies instead of burning a day's spend on one bad loop.
+Swap one line: Anthropic() becomes TrackedClient(). You get real per-run cost, and a run that blows its budget dies instead of burning a day's spend.
+
+I tested the cap on a deliberate runaway. It stopped after 1 call.
 
 pip install llm-run-guard
 
@@ -153,11 +151,9 @@ github.com/jlank31/marketing-engineer-tools
 
 ## Drop 6 — Wed Sep 9, 3:45pm ET
 
-A model update broke my pipeline in a way I want to save you.
+A model update broke my pipeline. Here are the 20 lines that would have saved me.
 
-Claude 5 started returning its reasoning in the first slot of the response. Every
-piece of code I had that read content[0] as the answer got a thinking block
-instead, and crashed.
+Claude 5 started returning its reasoning in the first slot of the response. Every piece of code I had that read content[0] as the answer got a thinking block, and crashed.
 
 Not a subtle degradation. A hard stop, mid-run, on a Friday.
 
