@@ -260,7 +260,7 @@ REASSURANCE_OPENER = re.compile(
     r"(?i)\b(?:"
     r"(?:you'?re|you are) not (?:alone|imagining (?:it|this)|crazy|broken"
     r"|the only one|losing your mind)"
-    r"|it'?s not just you"
+    r"|it'?s not just you|it is not just you"
     r"|if (?:this|that) (?:sounds|feels) familiar"
     r")\b"
 )
@@ -288,8 +288,9 @@ INTERROGATIVE_FRAGMENT = re.compile(
 # were genuinely blunt it wouldn't need the warm-up.
 FALSE_CANDOR = re.compile(
     r"(?i)\b(?:"
-    r"let'?s be honest|let me be (?:honest|blunt|clear)|to be honest"
-    r"|truth be told|here'?s the truth|the truth is|if we'?re (?:being )?honest"
+    r"let'?s be honest|let us be honest|let me be (?:honest|blunt|clear)|to be honest"
+    r"|truth be told|here'?s the truth|here is the truth|the truth is"
+    r"|if we'?re (?:being )?honest|if we are (?:being )?honest"
     r"|here'?s what nobody (?:tells|talks about|will tell)"
     r"|i'?ll be honest|real talk"
     r")\b"
@@ -301,7 +302,7 @@ OVERSTATEMENT_FORMULA = re.compile(
     r"(?i)\b(?:"
     r"cannot be overstated|can'?t be overstated|speaks volumes|no small feat"
     r"|worth its weight in gold|needs no introduction|goes without saying"
-    r"|it'?s no exaggeration|more important than ever"
+    r"|it'?s no exaggeration|it is no exaggeration|more important than ever"
     r")\b"
 )
 
@@ -309,7 +310,10 @@ OVERSTATEMENT_FORMULA = re.compile(
 # one. "Enter <Product>." is the same move but deliberately NOT matched — "enter"
 # has too many literal uses to catch safely.
 PRODUCT_PIVOT = re.compile(
-    r"(?i)\b(?:that'?s|this is|here'?s) where\b[^.!?]{1,45}?\bcomes? in\b"
+    # Both contracted and expanded auxiliaries. Listing only "that's" would
+    # repeat the exact bug that hid "It's not X. It's Y." for months: a draft
+    # can arrive either way, and the contraction pass runs later.
+    r"(?i)\b(?:that'?s|that is|this is|here'?s|here is) where\b[^.!?]{1,45}?\bcomes? in\b"
 )
 
 # Correlative scaffolding and audience-hedging. Both are legitimate English, which
