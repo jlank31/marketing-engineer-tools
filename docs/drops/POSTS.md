@@ -133,7 +133,7 @@ Your Claude API cost tracking is probably wrong. Mine was, for months.
 
 > Cached tokens bill at 1.25x to write and 0.10x to read, and the API reports them SEPARATELY from input_tokens. Skip that, understate every cached call.
 > Server-side web search costs $10 per 1,000 requests, on top of tokens.
-> Unknown model IDs. Most trackers return $0 for a model they don't know, so a new model version is invisible to your budget cap.
+> Unknown model IDs. Most trackers return $0 for one they don't know, so a new model version is invisible to your cap.
 
 That third one is dangerous. Mine returned 0.0, so a model missing from the price table silently bypassed the cap.
 
