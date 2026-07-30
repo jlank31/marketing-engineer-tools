@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.eggs/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Secrets — nothing here should ever hold one, but belt and braces.
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*credentials*.json
+*service-account*.json
+
+# OS
+.DS_Store

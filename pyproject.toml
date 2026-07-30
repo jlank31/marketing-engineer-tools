@@ -1,0 +1,24 @@
+# Workspace root. This is NOT a package — it exists to hold shared tool config
+# so every package lints and tests the same way. Packages live in packages/*.
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["packages/*/src/*/content_quality.py", "packages/*/src/*/repetition.py"]
+# ^ Mirrored files are formatted by their private upstream. Reformatting them
+#   here would break byte-identical mirroring and make every promote a conflict.
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["packages"]
+addopts = "-q"
+
+[tool.ruff.lint.per-file-ignores]
+# Long lines in tools/ are load-bearing, not sloppy:
+#   promote.py holds exact-match substitution literals — wrapping one changes
+#   what it matches, and a substitution that silently stops matching is how a
+#   private reference ships to a public package.
+#   check_brand_leak.py holds detection regexes, same reasoning.
+"tools/*.py" = ["E501"]

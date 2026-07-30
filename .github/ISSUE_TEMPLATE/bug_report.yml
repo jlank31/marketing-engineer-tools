@@ -1,0 +1,31 @@
+name: Bug report
+description: A detector misfires, or something crashes.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A false positive counts as a bug and is genuinely useful to hear about —
+        these detectors are tuned to under-report, so one that cries wolf is a
+        real defect.
+  - type: textarea
+    id: input
+    attributes:
+      label: The exact text or command
+      description: Smallest input that shows the problem. Paste the text itself.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected vs what happened
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: "`prose-tells --version`, and your Python version"
+    validations:
+      required: true

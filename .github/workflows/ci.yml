@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push: { branches: [main] }
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "${{ matrix.python }}" }
+      # Installed WITHOUT extras and with no env vars set, because "works on a
+      # stranger's machine with nothing configured" is the actual contract.
+      - run: pip install ./packages/prose-tells pytest
+      - run: python -m pytest packages/prose-tells/tests -q
+      - name: CLI smoke test in a bare environment
+        run: |
+          env -i "$(which prose-tells)" --version
+          printf "In today's fast-paced landscape, brands must adapt.\n" > /tmp/s.md
+          env -i "$(which prose-tells)" scan /tmp/s.md && exit 1 || test $? -eq 1
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install ruff
+      - run: ruff check packages tools

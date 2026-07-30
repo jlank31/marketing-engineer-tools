@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or idea
+    url: https://github.com/jlank31/marketing-engineer/discussions
+    about: Questions, ideas, and "how would I use this for X" go in Discussions.
+  - name: Contribution policy
+    url: https://github.com/jlank31/marketing-engineer/blob/main/CONTRIBUTING.md
+    about: Read this first — some files are mirrored and cannot be edited directly.

@@ -1,0 +1,33 @@
+name: release
+
+# Tag format: <package>-v<semver>   e.g.  prose-tells-v0.1.0
+# Only the tagged package is built and published.
+on:
+  push:
+    tags: ["*-v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write   # PyPI Trusted Publishing (OIDC) — no long-lived token in a public repo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+
+      - name: resolve package from tag
+        id: pkg
+        run: |
+          name="${GITHUB_REF_NAME%-v*}"
+          test -d "packages/$name" || { echo "::error::no packages/$name for tag $GITHUB_REF_NAME"; exit 1; }
+          echo "dir=packages/$name" >> "$GITHUB_OUTPUT"
+
+      # Never publish something that failed its own guards.
+      - run: pip install build pytest ./${{ steps.pkg.outputs.dir }}
+      - run: python -m pytest ${{ steps.pkg.outputs.dir }}/tests -q
+      - run: python tools/check_brand_leak.py
+
+      - run: python -m build --outdir dist ${{ steps.pkg.outputs.dir }}
+      - uses: pypa/gh-action-pypi-publish@release/v1
