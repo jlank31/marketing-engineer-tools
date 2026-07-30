@@ -107,6 +107,10 @@ BANNED_PHRASES: tuple[str, ...] = (
     "in today's fast-paced", "it's no secret that", "let's dive deep",
     "let's explore", "the key takeaway", "it's important to note",
     "it's worth mentioning", "one might argue",
+    # 2026-07-29 additions: dead metaphors and inflation that survive a
+    # word-level pass because each word is individually ordinary.
+    "double-edged sword", "paradigm shift", "a beacon of", "a testament to",
+    "the perfect storm", "a game of inches", "moving the goalposts",
     # Faux-profound "that's the whole X" closers, banned as a FAMILY.
     # Both contracted and expanded forms: a draft can arrive either way.
     "that's the whole game", "that is the whole game",
@@ -214,7 +218,12 @@ HOLLOW_OPENER = re.compile(
 SCAFFOLD_TRANSITION = re.compile(
     r"(?:\bthat said\b|\bit'?s worth noting\b|\bit is worth noting\b|"
     r"\bneedless to say\b|\bat the end of the day\b|"
-    r"\bhere's the part that surprises\b)"
+    r"\bhere's the part that surprises\b|"
+    # 2026-07-29 additions. Same job as the above: connective tissue that
+    # announces structure. "the bottom line" is included but "bottom line"
+    # alone is not, since it's a real finance term.
+    r"\bsimply put\b|\bat its core\b|\bthe bottom line\b|"
+    r"\bmake no mistake\b|\bthat being said\b|\bwhen all is said\b)"
     r"|(?:^|[.!?]\s+)(?:ultimately|in short|in summary|in conclusion)\b",
     re.IGNORECASE | re.MULTILINE,
 )
@@ -228,6 +237,102 @@ AI_TELL_VERB = re.compile(
     r"(?i)\b(?:supercharg(?:e[sd]?|ing)|harness(?:e[sd]|ing)?|"
     r"revolutioni[sz]e[sd]?|revolutioni[sz]ing|spearhead(?:s|ed|ing)?|"
     r"delv(?:e[sd]?|ing))\b"
+)
+
+# ---------------------------------------------------------------------------
+# 2026-07-29 refresh. Six families the word-level detectors structurally miss,
+# because each one is a SHAPE rather than a vocabulary choice. A draft can pass
+# every banned-word check and still be obviously generated if it keeps doing
+# these. Sources: the 2026 AI-tell literature (Forbes' Feb-2026 giveaway-signs
+# piece, the contentbeta/oliviacal blacklists, Peter Yang's no-ai-slop skill) plus
+# what the models observably overuse.
+#
+# All six use CLOSED lists, matching the rest of this module: an open-ended
+# "noun + ?" or "any reassurance" pattern would false-positive on ordinary prose,
+# and a detector that cries wolf gets switched off.
+# ---------------------------------------------------------------------------
+
+# The single most consistent cross-model tell in the 2026 literature: the
+# reassurance opener. Claude, ChatGPT, and Gemini all reach for it to manufacture
+# rapport before saying anything. "You're not wrong" is deliberately EXCLUDED —
+# it's ordinary conversational English, unlike the fixed comfort phrases below.
+REASSURANCE_OPENER = re.compile(
+    r"(?i)\b(?:"
+    r"(?:you'?re|you are) not (?:alone|imagining (?:it|this)|crazy|broken"
+    r"|the only one|losing your mind)"
+    r"|it'?s not just you"
+    r"|if (?:this|that) (?:sounds|feels) familiar"
+    r")\b"
+)
+
+# Noun-phrase question used as a fake-punchy transition ("The result? A 40% lift.").
+# The rhythm is distinctive: a two-word question, then the answer as a fragment.
+#
+# This one is matched per line and anchored, not searched loosely, after three
+# false positives on live content:
+#   "## How do buyers ... tell the difference?"  a heading that happens to END
+#                                               in a listed noun
+#   "What is the reason?"                        an ordinary question
+#   "### The catch?"                             a legitimate H2 structure
+# The tell is a SHORT STANDALONE question, so it must start a line or follow
+# sentence-ending punctuation, and heading lines are skipped entirely. A loose
+# search matches the same words inside perfectly good prose.
+INTERROGATIVE_FRAGMENT = re.compile(
+    r"(?:^|(?<=[.!?])\s+)(?:the|their|our|my)\s+"
+    r"(?:result|catch|problem|kicker|twist|upside|downside|difference|reason"
+    r"|point|best part|worst part|reality|takeaway|fix|answer|issue|payoff)\?",
+    re.IGNORECASE,
+)
+
+# Throat-clearing that claims candor instead of delivering it. If the next line
+# were genuinely blunt it wouldn't need the warm-up.
+FALSE_CANDOR = re.compile(
+    r"(?i)\b(?:"
+    r"let'?s be honest|let me be (?:honest|blunt|clear)|to be honest"
+    r"|truth be told|here'?s the truth|the truth is|if we'?re (?:being )?honest"
+    r"|here'?s what nobody (?:tells|talks about|will tell)"
+    r"|i'?ll be honest|real talk"
+    r")\b"
+)
+
+# Asserting importance rather than demonstrating it. Always replaceable with the
+# specific consequence, which is the actual information.
+OVERSTATEMENT_FORMULA = re.compile(
+    r"(?i)\b(?:"
+    r"cannot be overstated|can'?t be overstated|speaks volumes|no small feat"
+    r"|worth its weight in gold|needs no introduction|goes without saying"
+    r"|it'?s no exaggeration|more important than ever"
+    r")\b"
+)
+
+# The pivot-to-product cliché. Nearly every AI-written marketing page contains
+# one. "Enter <Product>." is the same move but deliberately NOT matched — "enter"
+# has too many literal uses to catch safely.
+PRODUCT_PIVOT = re.compile(
+    r"(?i)\b(?:that'?s|this is|here'?s) where\b[^.!?]{1,45}?\bcomes? in\b"
+)
+
+# Correlative scaffolding and audience-hedging. Both are legitimate English, which
+# is why they're SOFT by default — the tell is frequency, not any single use.
+CORRELATIVE_HEDGE = re.compile(
+    # "but also" is usually split by a pronoun ("but IT also", "but THEY also"),
+    # so allow a short gap rather than requiring adjacency.
+    r"(?i)\bnot only\b[^.!?]{0,70}\bbut\b[^.!?]{0,15}\balso\b"
+    r"|\bwhether you'?re\b[^.!?]{0,45}\bor\b"
+)
+
+# Era-framing: manufactured historical momentum standing in for a real reason.
+ERA_FRAME = re.compile(
+    r"(?i)\b(?:gone are the days|in an era where|in the age of"
+    r"|as we (?:move|head|step) into|in this new era|now more than ever)\b"
+)
+
+# Metaphorical "navigate". Literal navigation is fine, so this requires an
+# abstract object — you can navigate a harbor, but "navigating the complexities"
+# is filler for "dealing with".
+METAPHORICAL_NAVIGATE = re.compile(
+    r"(?i)\bnavigat(?:e|ing|es)\s+(?:the\s+|this\s+|these\s+)?"
+    r"(?:complexit|ever-|challeng|nuance|intricac|landscape|waters|maze|minefield|terrain)"
 )
 
 FILLER_INTENSIFIER = re.compile(
@@ -308,6 +413,7 @@ PLACEHOLDER_TOKEN = re.compile(
 def find_reversal_patterns(text: str) -> list[str]:
     """Negate-then-assert, all three shapes. The #1 AI tell."""
     n = normalize(text)
+
     out: list[str] = []
     for pat in (REVERSAL_PERIOD, REVERSAL_COMMA, REVERSAL_DASH):
         out += [m.group(0).strip() for m in pat.finditer(n)]
@@ -336,6 +442,61 @@ def find_vague_quantifiers(text: str) -> list[str]:
 
 def find_ai_tell_verbs(text: str) -> list[str]:
     return _distinct(AI_TELL_VERB, text)
+
+
+# --- 2026-07-29 refresh: shape-level tells (see the pattern block above) -----
+
+def find_reassurance_opener(text: str) -> list[str]:
+    """Manufactured rapport: "You're not alone", "It's not just you"."""
+    return _distinct(REASSURANCE_OPENER, text)
+
+
+def find_interrogative_fragment(text: str) -> list[str]:
+    """Fake-punchy transitions: "The result?", "The catch?".
+
+    Line-aware on purpose: markdown headings are skipped, because an H2 reading
+    "The catch?" is a legitimate document structure rather than a prose tic.
+    """
+    seen, out = set(), []
+    for line in normalize(text).splitlines():
+        if line.lstrip().startswith("#"):
+            continue
+        for m in INTERROGATIVE_FRAGMENT.finditer(line):
+            frag = m.group(0).strip()
+            if frag.lower() not in seen:
+                seen.add(frag.lower())
+                out.append(frag)
+    return out
+
+
+def find_false_candor(text: str) -> list[str]:
+    """Claims of bluntness used as throat-clearing: "Let's be honest"."""
+    return _distinct(FALSE_CANDOR, text)
+
+
+def find_overstatement_formula(text: str) -> list[str]:
+    """Asserted importance instead of demonstrated: "cannot be overstated"."""
+    return _distinct(OVERSTATEMENT_FORMULA, text)
+
+
+def find_product_pivot(text: str) -> list[str]:
+    """The marketing-page pivot: "That's where <product> comes in"."""
+    return _distinct(PRODUCT_PIVOT, text)
+
+
+def find_correlative_hedge(text: str) -> list[str]:
+    """"Not only X but also Y" and "Whether you're X or Y". SOFT by default."""
+    return _distinct(CORRELATIVE_HEDGE, text)
+
+
+def find_era_frame(text: str) -> list[str]:
+    """Manufactured momentum: "Gone are the days", "in the age of"."""
+    return _distinct(ERA_FRAME, text)
+
+
+def find_metaphorical_navigate(text: str) -> list[str]:
+    """"Navigating the complexities" — filler for "dealing with"."""
+    return _distinct(METAPHORICAL_NAVIGATE, text)
 
 
 def find_filler_intensifiers(text: str) -> list[str]:
@@ -526,6 +687,18 @@ def check_text(text: str, profile: Profile | None = None) -> Result:
         )
 
     n = normalize(text)
+
+    def occurrences(hit: str) -> str:
+        """Suffix showing how many times this exact hit appears.
+
+        The detectors dedupe (via _distinct), which is right for readability but
+        hides scale: a draft with 9 "actually"s reported identically to one with a
+        single instance, so the cleanup looked far smaller than it was. Found while
+        scanning real published articles.
+        """
+        c = n.lower().count(hit.lower())
+        return f" (x{c})" if c > 1 else ""
+
     r.stats["word_count"] = len(text.split())
     r.stats["char_count"] = len(text)
 
@@ -533,7 +706,8 @@ def check_text(text: str, profile: Profile | None = None) -> Result:
         emit("em_dash", f"{c} em dash(es). Replace with periods, commas, or a rewrite.")
 
     for w in find_banned_words(text, p.banned_extra, p.proper_nouns):
-        emit("banned_words", f"Banned AI word '{w}'. Replace with a natural alternative.")
+        emit("banned_words",
+             f"Banned AI word '{w}'{occurrences(w)}. Replace with a natural alternative.")
 
     # Report up to 3, not just the first. Reporting only hits[0] turns cleanup
     # into whack-a-mole: you fix one, re-run, and the next one you never saw
@@ -556,9 +730,29 @@ def check_text(text: str, profile: Profile | None = None) -> Result:
         ("banned_phrase", find_banned_phrases, "Bland filler phrase"),
         ("inflation", find_inflation, "Significance inflation"),
         ("chatbot", find_chatbot_artifacts, "Chatbot artifact"),
+        # 2026-07-29 refresh. Shape-level tells: a draft can pass every
+        # word-level check above and still read as generated if it keeps
+        # doing these.
+        ("reassurance", find_reassurance_opener, "Manufactured rapport"),
+        ("interrogative_fragment", find_interrogative_fragment,
+         "Fake-punchy question fragment"),
+        ("false_candor", find_false_candor, "Claimed candor (throat-clearing)"),
+        ("overstatement", find_overstatement_formula, "Asserted, not demonstrated"),
+        ("product_pivot", find_product_pivot, "Pivot-to-product cliché"),
+        ("era_frame", find_era_frame, "Manufactured historical momentum"),
+        ("metaphorical_navigate", find_metaphorical_navigate,
+         "Metaphorical 'navigate' (use 'dealing with')"),
     ):
         for h in fn(text)[:3]:
-            emit(key, f"{label}: \"{h}\".")
+            emit(key, f"{label}: \"{h}\"{occurrences(h)}.")
+
+    # SOFT by default: both constructions are legitimate English, so the tell is
+    # frequency rather than any single use. Warn, never fail.
+    for h in find_correlative_hedge(text)[:3]:
+        r.warnings.append(
+            f'WARN: Correlative scaffolding: "{h[:60]}". Split into two claims, '
+            f"or name the audience directly."
+        )
 
     if (hits := find_closing_reflex(text)):
         r.warnings.append(

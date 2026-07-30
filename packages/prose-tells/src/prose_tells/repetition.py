@@ -71,12 +71,40 @@ def shingles(text: str, n: int = 5) -> set[str]:
     return out
 
 
+# Lines that are production metadata rather than prose: "SEO TITLE: ...",
+# "META DESCRIPTION: ...", "SLUG: ...". An ALL-CAPS or Title-Case key followed by
+# a colon, at the very start of a line.
+_METADATA_LINE = re.compile(r"^[A-Z][A-Za-z ]{2,30}:\s")
+
+
 def opening_line(text: str) -> str:
-    """First non-empty line of a draft — the hook the feed shows."""
-    for line in (text or "").splitlines():
-        line = line.strip()
-        if line:
-            return line
+    """The draft's first line of actual prose — the hook a reader sees first.
+
+    Skips markdown headings, horizontal rules, YAML frontmatter delimiters, and
+    KEY: value metadata lines.
+
+    This used to return the literal first non-empty line, which broke opener-echo
+    detection on any format that front-loads metadata: every file beginning
+    "SEO TITLE: ..." reported as echoing every other, because the compared
+    "openers" were all the same metadata key. Six false pairs out of six on a real
+    archive. The hook is what the reader meets, not what the CMS reads.
+    """
+    in_frontmatter = False
+    for raw in (text or "").splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        if line in ("---", "+++"):
+            # Toggle: an opening delimiter starts frontmatter, the next ends it.
+            in_frontmatter = not in_frontmatter
+            continue
+        if in_frontmatter:
+            continue
+        if line.startswith("#") or set(line) <= set("-=*_ "):
+            continue
+        if _METADATA_LINE.match(line):
+            continue
+        return line
     return ""
 
 

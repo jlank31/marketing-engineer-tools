@@ -59,7 +59,14 @@ RULES: list[tuple[str, str, re.Pattern[str]]] = [
     # ---------------- IDENTITY ----------------
     ("supabase project",    "IDENTITY", re.compile(r"\b(?!x{4})[a-z0-9]{15,}\.supabase\.(?:co|in)\b")),
     ("gcp service account", "IDENTITY", re.compile(r"[A-Za-z0-9._%-]+@[a-z0-9-]+\.iam\.gserviceaccount\.com")),
-    ("google file id",      "IDENTITY", re.compile(r"\b1[A-Za-z0-9_\-]{32,}\b")),
+    # Google Drive/Docs file IDs start with "1" and run 33+ chars. The lookahead
+    # requiring an uppercase letter is what stops this matching a lowercase hex
+    # digest — VENDORED.sha256 holds sha256 hashes, and one beginning with "1"
+    # tripped this rule as a "leaked doc ID". Tightened rather than exempting the
+    # file, because the same collision would recur on any commit hash or checksum
+    # anywhere in the repo.
+    ("google file id",      "IDENTITY", re.compile(
+        r"\b1(?=[A-Za-z0-9_\-]{32,}\b)(?=[A-Za-z0-9_\-]*[A-Z])[A-Za-z0-9_\-]{32,}\b")),
     ("hubspot portal",      "IDENTITY", re.compile(r"\b44217588\b")),
     # Allow the LinkedIn/GitHub profile links that are deliberately public.
     ("email address",       "IDENTITY", re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")),

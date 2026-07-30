@@ -154,3 +154,73 @@ def test_warnings_alone_do_not_fail_the_run(tmp_path):
     f.write_text("We shipped the change on Tuesday. What's your take?")
     rc = cli_main(["scan", str(f)])
     assert rc == 0
+
+
+# ---------------------------------------------------------------- corpus command
+
+def test_corpus_finds_verbatim_reuse_and_never_fails(tmp_path):
+    """Corpus findings are descriptive, so the command always exits 0.
+
+    Repetition is sometimes a positioning line you want consistent and sometimes
+    a rut, and no threshold distinguishes them. Exiting non-zero would make this
+    unusable as anything but a gate.
+    """
+    shared = ("We shipped the review gate on Tuesday and two clients "
+              "noticed the difference within a day.")
+    (tmp_path / "a.md").write_text(f"First piece.\n\n{shared}\n")
+    (tmp_path / "b.md").write_text(f"Second piece.\n\n{shared}\n")
+
+    from prose_tells.corpus import analyze, load_corpus
+    report = analyze(load_corpus(tmp_path))
+    assert report.verbatim, "identical sentence across two files should be found"
+    assert cli_main(["corpus", str(tmp_path)]) == 0
+
+
+def test_corpus_handles_a_single_file_without_crashing(tmp_path):
+    (tmp_path / "only.md").write_text("One document, nothing to compare against.\n")
+    assert cli_main(["corpus", str(tmp_path)]) == 0
+
+
+def test_corpus_bad_directory_is_usage_error(tmp_path):
+    assert cli_main(["corpus", str(tmp_path / "nope")]) == 2
+
+
+def test_corpus_excludes_matching_sections(tmp_path):
+    """Production metadata repeats across every file and swamps real findings.
+
+    On a real 10-document archive, a boilerplate image-prompt block produced
+    three of the top verbatim hits before this existed.
+    """
+    boiler = "## Cover Image Prompt\n\nrisograph print in a single bold ink color on cream stock\n"
+    (tmp_path / "a.md").write_text(f"Distinct opening for A.\n\n{boiler}")
+    (tmp_path / "b.md").write_text(f"Entirely different opening for B.\n\n{boiler}")
+
+    from prose_tells.corpus import analyze, load_corpus
+    assert analyze(load_corpus(tmp_path)).verbatim, "boilerplate should match with no exclusion"
+    filtered = analyze(load_corpus(tmp_path, exclude_section="image prompt"))
+    assert not filtered.verbatim, "excluded section should not count as reuse"
+
+
+def test_opening_line_skips_metadata_and_headings():
+    """Regression: openers were compared as metadata, not prose.
+
+    Every file starting "SEO TITLE: ..." reported as echoing every other one,
+    because the compared openers were all the same metadata key — six false pairs
+    out of six on a real archive.
+    """
+    from prose_tells.repetition import opening_line
+
+    doc = ("SEO TITLE: Why Copy Falls Flat\n\n"
+           "META DESCRIPTION: Something about copy.\n\n"
+           "# The Heading\n\n"
+           "Most copy falls flat for one reason.\n")
+    assert opening_line(doc) == "Most copy falls flat for one reason."
+    assert opening_line("---\ntitle: X\n---\n\nThe real opener.") == "The real opener."
+
+
+def test_siblings_flag_does_not_crash(tmp_path):
+    """Regression: the --siblings path raised TypeError from three wrong signatures."""
+    (tmp_path / "old.md").write_text("An earlier piece about review gates.\n")
+    target = tmp_path / "new.md"
+    target.write_text("A newer piece about review gates.\n")
+    assert cli_main(["scan", str(target), "--siblings", str(tmp_path)]) in (0, 1)

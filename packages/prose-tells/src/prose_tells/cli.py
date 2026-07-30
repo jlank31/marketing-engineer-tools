@@ -25,8 +25,10 @@ from pathlib import Path
 
 from . import __version__
 from .content_quality import Profile, check_text, read_siblings
+from .corpus import STAT_MIN_SHARED, analyze, load_corpus, render
+from .corpus import to_dict as corpus_to_dict
 from .profiles import PRESETS, dump, load, to_dict
-from .repetition import find_verbatim_runs, opener_echo, stat_fingerprint
+from .repetition import find_verbatim_runs, opener_echo, opening_line, stat_fingerprint
 
 STDIN = "-"
 
@@ -46,14 +48,32 @@ def _resolve_profile(args) -> Profile:
 
 
 def _corpus_report(text: str, corpus: dict[str, str]) -> list[str]:
-    """Cross-document findings: reuse a per-text scan structurally cannot see."""
+    """Cross-document findings for ONE draft against a corpus.
+
+    Signatures here are easy to get wrong, and getting them wrong crashes rather
+    than degrades: find_verbatim_runs returns (snippet, source) in that order,
+    opener_echo takes an opener STRING plus a list of other openers (not raw
+    texts) and returns a single match or None, and stat_fingerprint takes one text
+    and returns a set. An earlier version of this function got all three wrong and
+    the --siblings path raised TypeError. Hence the explicit test coverage.
+    """
     out: list[str] = []
-    for other, snippet in find_verbatim_runs(text, corpus):
-        out.append(f"verbatim run shared with {other}: {snippet!r}")
-    for other in opener_echo(text, corpus):
-        out.append(f"opening line echoes {other}")
-    for other, shared in stat_fingerprint(text, corpus):
-        out.append(f"recycled stat block with {other} ({shared} shared figures)")
+
+    for snippet, source in find_verbatim_runs(text, corpus):
+        out.append(f'verbatim run shared with {source}: "{snippet}"')
+
+    openers = {label: opening_line(body) for label, body in corpus.items()}
+    echoed = opener_echo(opening_line(text), list(openers.values()))
+    if echoed:
+        match = next((k for k, v in openers.items() if v == echoed), "another draft")
+        out.append(f"opening line echoes {match}")
+
+    mine = stat_fingerprint(text)
+    for label, body in corpus.items():
+        shared = mine & stat_fingerprint(body)
+        if len(shared) >= STAT_MIN_SHARED:
+            out.append(f"recycled stat block with {label} ({len(shared)} shared figures)")
+
     return out
 
 
@@ -116,6 +136,35 @@ def _scan(args) -> int:
     return worst
 
 
+def _corpus_cmd(args) -> int:
+    """Read a whole archive and report where it repeats itself.
+
+    Always exits 0. Repetition is a finding for a human to judge, not a failure:
+    some of it is a positioning line you want consistent, some is a rut, and no
+    threshold can tell those apart.
+    """
+    root = Path(args.dir)
+    if not root.is_dir():
+        print(f"prose-tells: not a directory: {root}", file=sys.stderr)
+        return 2
+
+    corpus = load_corpus(root, pattern=args.pattern,
+                         exclude_section=args.exclude_section)
+    if not corpus:
+        print(f"prose-tells: no files matching {args.pattern!r} under {root}",
+              file=sys.stderr)
+        return 2
+
+    report = analyze(corpus, min_run=args.min_run)
+    if args.json:
+        json.dump({"version": __version__, **corpus_to_dict(report)},
+                  sys.stdout, indent=2)
+        sys.stdout.write("\n")
+    else:
+        print(render(report))
+    return 0
+
+
 def _profile_cmd(args) -> int:
     if args.out:
         dump(PRESETS[args.preset], args.out)
@@ -144,6 +193,25 @@ def build_parser() -> argparse.ArgumentParser:
                    help="directory of earlier work to compare against for reuse")
     s.add_argument("--json", action="store_true", help="machine-readable output")
     s.set_defaults(func=_scan)
+
+    c = sub.add_parser(
+        "corpus",
+        help="read a whole archive and report where it repeats itself",
+        description="Cross-document analysis: verbatim reuse, echoed openers, "
+                    "recycled stat blocks, and phrases that recur across many "
+                    "pieces. Findings, not verdicts — always exits 0.",
+    )
+    c.add_argument("dir", help="directory of published work")
+    c.add_argument("--pattern", default="*.md",
+                   help="glob for files to include (default: *.md)")
+    c.add_argument("--exclude-section", default="", metavar="REGEX",
+                   help="drop markdown sections whose heading matches, e.g. "
+                        "'image prompt|schema' — production metadata repeats "
+                        "across every file and swamps real findings")
+    c.add_argument("--min-run", type=int, default=8, metavar="N",
+                   help="word-run length that counts as verbatim reuse (default: 8)")
+    c.add_argument("--json", action="store_true", help="machine-readable output")
+    c.set_defaults(func=_corpus_cmd)
 
     p = sub.add_parser("profile", help="print a starter profile as JSON")
     p.add_argument("--preset", choices=sorted(PRESETS), default="generic")
