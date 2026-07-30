@@ -15,7 +15,7 @@ post. If someone runs the tool on it and reports the hit, the answer is yes, tha
 is the example. Every other post is clean at 0 issues.
 
 Repo flips public before drop 1:
-`gh repo edit jlank31/marketing-engineer --visibility public --accept-visibility-change-consequences`
+`gh repo edit jlank31/marketing-engineer-tools --visibility public --accept-visibility-change-consequences`
 
 | # | Date | Drop |
 |---|---|---|
@@ -51,7 +51,7 @@ It finds the lines that read as machine-written and says why, instead of a confi
 
 pip install prose-tells
 
-github.com/jlank31/marketing-engineer
+github.com/jlank31/marketing-engineer-tools
 
 12 more of these coming, one a week through September
 
@@ -75,7 +75,7 @@ Never auto-ships.
 
 Free in the repo, drop 2 of 12
 
-github.com/jlank31/marketing-engineer
+github.com/jlank31/marketing-engineer-tools
 
 ---
 
@@ -101,7 +101,7 @@ It won't make writing good. Clean output is a floor.
 
 pip install prose-tells
 
-github.com/jlank31/marketing-engineer
+github.com/jlank31/marketing-engineer-tools
 
 ---
 
@@ -125,7 +125,7 @@ been spending re-explaining your own project to a machine with no memory.
 
 Both are in the repo, drop 4 of 12
 
-github.com/jlank31/marketing-engineer
+github.com/jlank31/marketing-engineer-tools
 
 ---
 
@@ -147,7 +147,7 @@ Swap one line: Anthropic() becomes TrackedClient(). You get real per-run cost, a
 
 pip install llm-run-guard
 
-github.com/jlank31/marketing-engineer
+github.com/jlank31/marketing-engineer-tools
 
 ---
 
@@ -171,7 +171,7 @@ I added that because I suspected the expensive path wasn't earning its keep. Sus
 
 pip install llm-run-guard
 
-github.com/jlank31/marketing-engineer
+github.com/jlank31/marketing-engineer-tools
 
 ---
 
@@ -196,7 +196,7 @@ One detail I'd have gotten wrong without shipping it: raw word diffs produce gar
 
 So the prompt-facing list only takes swaps of 3 words or fewer. The human report keeps everything.
 
-github.com/jlank31/marketing-engineer
+github.com/jlank31/marketing-engineer-tools
 
 ---
 
@@ -216,4 +216,4 @@ Also: about 1% of people who see an AI summary click a source. Citations are a b
 
 Full writeup plus 7 B2B email sequences in the repo. Last of 12
 
-github.com/jlank31/marketing-engineer
+github.com/jlank31/marketing-engineer-tools

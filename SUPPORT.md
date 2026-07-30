@@ -8,8 +8,8 @@ Maintenance mode means bugs and price-table updates get fixed. It does not mean 
 
 | You have | Go to |
 |---|---|
-| A bug, crash, or false positive | [Issues](https://github.com/jlank31/marketing-engineer/issues/new/choose) — needs a minimal reproduction |
-| A question, or "how would I use this for X" | [Discussions](https://github.com/jlank31/marketing-engineer/discussions) |
+| A bug, crash, or false positive | [Issues](https://github.com/jlank31/marketing-engineer-tools/issues/new/choose) — needs a minimal reproduction |
+| A question, or "how would I use this for X" | [Discussions](https://github.com/jlank31/marketing-engineer-tools/discussions) |
 | A security problem | [SECURITY.md](SECURITY.md) — not a public issue |
 | A patch | [CONTRIBUTING.md](CONTRIBUTING.md) — read the mirrored-files note first |
 

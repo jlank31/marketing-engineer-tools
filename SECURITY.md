@@ -2,7 +2,7 @@
 
 ## Reporting
 
-Use GitHub's [private vulnerability reporting](https://github.com/jlank31/marketing-engineer/security/advisories/new) rather than a public issue.
+Use GitHub's [private vulnerability reporting](https://github.com/jlank31/marketing-engineer-tools/security/advisories/new) rather than a public issue.
 
 Best effort acknowledgement within a week. This is a small project maintained on weekends; please don't treat that as an SLA.
 

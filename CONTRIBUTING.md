@@ -35,7 +35,7 @@ make check        # lint, tests, leak scan, mirror integrity — same as CI
 
 ## Support expectations
 
-Best effort, usually on weekends. Issues need a minimal reproduction — there's a template. Questions go in [Discussions](https://github.com/jlank31/marketing-engineer/discussions) rather than Issues.
+Best effort, usually on weekends. Issues need a minimal reproduction — there's a template. Questions go in [Discussions](https://github.com/jlank31/marketing-engineer-tools/discussions) rather than Issues.
 
 This repo has a stated scope: 12 drops across Aug–Sep 2026, then maintenance mode. Maintenance means bugs and price updates, not new surface area. Saying so up front seems better than going quiet in October and letting you wonder.
 

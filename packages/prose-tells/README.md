@@ -70,7 +70,7 @@ Every brand-specific value lives on `Profile`. Nothing in the package hardcodes 
 
 These detectors were extracted from a content pipeline that has published for real clients, every week, since April 2026. Nearly every rule carries a comment recording the specific failure that produced it, including the false positives that were deliberately allowed and why.
 
-That matters more than the rule list. Anyone can publish a list of AI writing tells; knowing which rules survive contact with real publishing is the hard part. Where a rule turned out to be wrong, it gets retracted in public — see the [essays](https://github.com/jlank31/marketing-engineer/tree/main/docs/essays) for three SEO rules I taught and now know were folklore.
+That matters more than the rule list. Anyone can publish a list of AI writing tells; knowing which rules survive contact with real publishing is the hard part. Where a rule turned out to be wrong, it gets retracted in public — see the [essays](https://github.com/jlank31/marketing-engineer-tools/tree/main/docs/essays) for three SEO rules I taught and now know were folklore.
 
 ## Two honest limits
 
@@ -80,6 +80,6 @@ That matters more than the rule list. Anyone can publish a list of AI writing te
 
 ## License
 
-MIT. Part of [marketing-engineer](https://github.com/jlank31/marketing-engineer).
+MIT. Part of [marketing-engineer-tools](https://github.com/jlank31/marketing-engineer-tools).
 
-Note: `content_quality.py` and `repetition.py` are mirrored from a private upstream and can't be edited directly here — see [CONTRIBUTING.md](https://github.com/jlank31/marketing-engineer/blob/main/CONTRIBUTING.md). Patches are welcome; they get replayed upstream.
+Note: `content_quality.py` and `repetition.py` are mirrored from a private upstream and can't be edited directly here — see [CONTRIBUTING.md](https://github.com/jlank31/marketing-engineer-tools/blob/main/CONTRIBUTING.md). Patches are welcome; they get replayed upstream.

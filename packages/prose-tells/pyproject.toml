@@ -31,9 +31,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jlank31/marketing-engineer"
-Source = "https://github.com/jlank31/marketing-engineer/tree/main/packages/prose-tells"
-Changelog = "https://github.com/jlank31/marketing-engineer/blob/main/packages/prose-tells/CHANGELOG.md"
+Homepage = "https://github.com/jlank31/marketing-engineer-tools"
+Source = "https://github.com/jlank31/marketing-engineer-tools/tree/main/packages/prose-tells"
+Changelog = "https://github.com/jlank31/marketing-engineer-tools/blob/main/packages/prose-tells/CHANGELOG.md"
 
 [project.scripts]
 prose-tells = "prose_tells.cli:main"

@@ -1,4 +1,4 @@
-# marketing-engineer
+# marketing-engineer-tools
 
 Free tools for people who publish a lot and can't afford for it to read like a robot wrote it.
 
