@@ -6,7 +6,7 @@ Everything here was pulled out of a content pipeline that has shipped work for r
 
 Most of them still carry the date and the failure in a code comment, so you can decide for yourself whether the rule earns its place.
 
-**By [Jared Castronova](https://www.linkedin.com/in/jaredcastronova/)**, VP of Content and AI Marketing at JAC Growth Marketing.
+**By [Jared Castronova](https://www.linkedin.com/in/jaredcastronova/)**, Founder of JAC Growth Marketing
 
 ---
 
