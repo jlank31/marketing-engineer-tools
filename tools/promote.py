@@ -85,10 +85,9 @@ MIRRORS: list[Mirror] = [
             ),
         ],
     ),
-    # Drop 3 (Aug 17). Blocked upstream until find_stale_event_reference takes an
-    # `events=` parameter instead of lazily importing the registry loader — see
-    # the DEBT note in the private test_vendor_sync.py MIRRORS table.
-    # Mirror("utils/post_validators.py", PKG / "post_validators.py"),
+    # Unblocked 2026-07-30: find_stale_event_reference now takes an `events=`
+    # parameter, so this file is stdlib-only and publishable.
+    Mirror("utils/post_validators.py", PKG / "post_validators.py"),
 ]
 
 # Files deliberately NOT mirrored, recorded so the reason survives.

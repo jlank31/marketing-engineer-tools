@@ -24,6 +24,13 @@ package hardcodes a house style.
 """
 
 from .content_quality import Profile, Result, check_text, normalize, strip_links
+from .post_validators import (
+    apply_contractions,
+    apply_percent_symbol,
+    find_stale_event_reference,
+    strip_em_dashes,
+    strip_filler_intensifiers,
+)
 from .repetition import (
     find_verbatim_runs,
     opener_echo,
@@ -37,6 +44,13 @@ __version__ = "0.1.0"
 
 __all__ = [
     "Profile",
+    # Deterministic transformers: the `fix` half of the toolkit. These EDIT text
+    # rather than reporting on it, which is why they live apart from check_text.
+    "apply_contractions",
+    "apply_percent_symbol",
+    "strip_em_dashes",
+    "strip_filler_intensifiers",
+    "find_stale_event_reference",
     "Result",
     "check_text",
     "normalize",

@@ -4,9 +4,15 @@
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-extend-exclude = ["packages/*/src/*/content_quality.py", "packages/*/src/*/repetition.py"]
-# ^ Mirrored files are formatted by their private upstream. Reformatting them
-#   here would break byte-identical mirroring and make every promote a conflict.
+# Mirrored files are formatted by their private upstream. Reformatting them here
+# would break byte-identical mirroring and turn every promote into a conflict, so
+# they are excluded from lint rather than reformatted. Add a line here whenever a
+# new file joins the mirror manifest in tools/promote.py.
+extend-exclude = [
+  "packages/*/src/*/content_quality.py",
+  "packages/*/src/*/repetition.py",
+  "packages/*/src/*/post_validators.py",
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B"]
