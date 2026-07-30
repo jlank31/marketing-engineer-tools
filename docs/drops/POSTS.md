@@ -2,214 +2,173 @@
 
 **Cadence: Wednesdays, 3:45pm ET.** Personal account, manual post.
 
-Each post leads with a specific failure and ends on a concrete line, never a
-question. No hashtags (not a reach lever on any channel in 2026).
+## The frame
 
-None of the 8 pitch the service. The repo is the pitch: someone who installs a
-tool that works has already learned the relevant thing about how the work gets
-done. A sales line in a giveaway post undercuts the giveaway.
+These are not product announcements. Each one is **a lesson from building
+something**, where the tool is the artifact of the lesson rather than the point.
 
-**Known and deliberate:** post 1 trips the reversal detector, because its first
-line quotes `"It's not X. It's Y."` as the specimen. That is the subject of the
-post. If someone runs the tool on it and reports the hit, the answer is yes, that
-is the example. Every other post is clean at 0 issues.
+The reader should finish thinking *"that's a good way to think about it"* before
+they think *"I should download that."* The click is a side effect of the idea
+landing.
 
-Repo flips public before drop 1:
+Rules that hold across all 8:
+
+- **The hook is an admission or a counterintuitive claim**, never a feature.
+- **One idea per post.** No feature lists, no bullets of capabilities.
+- **The lesson generalizes** past the specific tool, so the post is worth reading
+  even if you never install anything.
+- **No CTA.** "Free, drop N of 12" and the link. Nothing asking for anything.
+- **No pitch.** Nobody gets sold. The generosity is the position.
+- 500 to 800 characters. Shorter than feels comfortable.
+- No hashtags (not a reach lever on any channel in 2026).
+
+Repo goes public before drop 1:
 `gh repo edit jlank31/marketing-engineer-tools --visibility public --accept-visibility-change-consequences`
-
-| # | Date | Drop |
-|---|---|---|
-| 1 | Wed Aug 5 | prose-tells |
-| 2 | Wed Aug 12 | Landing Page Copy Tournament |
-| 3 | Wed Aug 19 | prose-tells fix + GitHub check |
-| 4 | Wed Aug 26 | CLAUDE.md Upgrader + Project Overlay |
-| 5 | Wed Sep 2 | llm-run-guard |
-| 6 | Wed Sep 9 | llm-run-guard: self-healing |
-| 7 | Wed Sep 16 | edit-digest |
-| 8 | Wed Sep 23 | The AEO Retractions + email sequences |
 
 ---
 
 ## Drop 1 — Wed Aug 5, 3:45pm ET
 
-I banned "It's not X. It's Y." from every piece of client content 6 months ago.
+6 months ago I banned a specific sentence pattern from every piece of client content.
 
-Wrote the rule. Wrote the detector. Shipped it into a pipeline that publishes
-weekly.
+Wrote the rule. Built the detector. Shipped it into a pipeline that publishes every week.
 
-Last week I packaged it up to give away, ran it on deliberately bad copy, and it caught 16 things while missing the one I care about most.
+Last week I finally tested that detector properly and found it had never once caught the most common version of the pattern it was written for.
 
-The regex spelled out "is not" as two words. So it caught the "isn't" version and sailed straight past the "it's not"
-version. Same sentence. Different apostrophe.
+6 months where the standard I'd written down wasn't being enforced, and nothing in the system was going to tell me.
 
-Six months of client work where the rule I'd written down wasn't being enforced.
+I fixed it, then packaged the whole thing up and put it on GitHub.
 
-Fixed it, added the test, put the whole thing on GitHub. Free, MIT, zero
-dependencies.
+That's the first of 12. I'm giving away the tooling I use to run content at scale, one a week through September.
 
-It finds the lines that read as machine-written and says why, instead of a confidence score you can't act on.
-
-pip install prose-tells
+Some of it is clever. Most of it is just what survived contact with real clients.
 
 github.com/jlank31/marketing-engineer-tools
-
-12 more of these coming, one a week through September
 
 ---
 
 ## Drop 2 — Wed Aug 12, 3:45pm ET
 
-Most AI copy tools share one flaw: ask for a rewrite and you get a rewrite. There's no outcome where the answer is "your page was already fine."
+Every AI copy tool shares one blind spot: ask it for a rewrite and you'll get a rewrite. There's no outcome where it tells you the page was already fine.
 
-So the copy tournament I've been using enters the live page as a competitor.
+So I built one where your current copy competes.
 
-8 rewrites, each from a different angle: pain-led, proof-led, objection-led, radical brevity. Your current copy joins as the 9th entrant, unchanged.
+8 rewrites from different angles, your live page entered as the 9th, and a 5-person panel that reads all of them together and ranks section by section. A skeptical CFO. A founder scrolling at midnight. The person you're selling to.
 
-A 5-person panel then reads all 9 in one pass and ranks them section by section: a skeptical CFO hunting unprovable claims, a founder scrolling at midnight, a competitor, your ideal customer, a conversion copywriter.
+Sometimes the original wins.
 
-Reading all 9 together beats scoring each alone, which produces halo effects and costs 9x more.
+That felt like a failed run the first time it happened. It wasn't. Knowing your page is already strong is worth as much as a rewrite.
 
-If the baseline wins, the report says so plainly. Cheap, useful outcome: your page is strong, stop rewriting it.
+Build the null result into the test, or you'll always find what you went looking for.
 
-Never auto-ships.
-
-Free in the repo, drop 2 of 12
-
+Free, drop 2 of 12
 github.com/jlank31/marketing-engineer-tools
 
 ---
 
 ## Drop 3 — Wed Aug 19, 3:45pm ET
 
-Complaining about a draft is easy. Fixing it is the boring part, so most tools skip it.
+Most writing tools tell you what's wrong. Very few of them fix it.
 
-4 rewrites that should never be done by hand:
+Flagging is the fun part to build. Fixing is fiddly and unglamorous: cut a word and you're left with a doubled space, an orphaned comma, a sentence that now starts lowercase.
 
-> em dashes stripped, because they're the most recognizable 2026 fingerprint
-> "do not" contracted to "don't", because the expanded form reads stiff
-> spelled-out percentages rendered as the symbol
-> empty intensifiers cut, with the punctuation and capitalization around each
-  cut repaired so the sentence still reads
+So nobody builds it, and every AI writing checker hands you a list and walks away.
 
-That last part is the trick. Deleting a word is trivial. Not leaving a doubled space, an orphaned comma, or a lowercase sentence start is what makes it usable on a finished draft.
+This week's drop does the boring half. 4 rewrites nobody should be doing by hand, and it cleans up after itself.
 
-It won't make writing good. Clean output is a floor, not a finished piece.
+It won't make your writing good. Clean output is a floor, not a finished piece.
 
-pip install prose-tells
+But doing the tedious part is what turns a tool you tried once into one you run every time.
 
+Free, drop 3 of 12
 github.com/jlank31/marketing-engineer-tools
 
 ---
 
 ## Drop 4 — Wed Aug 26, 3:45pm ET
 
-If you use an AI coding assistant, you've had this week: it asks where the config
-lives. You tell it. Next session, it asks again.
+For months I started every working session by re-explaining my own project to a machine with no memory.
 
-Two free tools for that, both about 5 minutes to run.
+Where the config lives. What never to touch. Why that one file is strange.
 
-The first rewrites your project's instruction file so the assistant behaves like
-a teammate instead of a stranger. Not "be helpful" boilerplate. Operating rules: what to do without asking, what to never touch, how much effort a given
-task deserves.
+Then I wrote it down once and got the time back.
 
-The second reads your project once and writes a permanent cheat sheet. File
-locations, naming conventions, data models, the gotchas that bit you in March. The
-assistant loads it instead of re-deriving your codebase every time.
+Two tools in this week's drop do that for you. One rewrites your project's instruction file so your AI assistant behaves like a teammate instead of a stranger. The other reads your codebase and writes the cheat sheet itself.
 
-The payoff is immediate and slightly annoying: you realize how much time you'd
-been spending re-explaining your own project to a machine with no memory.
+5 minutes each.
 
-Both are in the repo, drop 4 of 12
+The payoff is immediate and slightly embarrassing: you see how much of your week went to context you already had and never bothered to write down.
 
+Free, drop 4 of 12
 github.com/jlank31/marketing-engineer-tools
 
 ---
 
 ## Drop 5 — Wed Sep 2, 3:45pm ET
 
-Your Claude API cost tracking is probably wrong. Mine was, for months.
+I was under-reporting my own AI spend for months and had no idea.
 
-3 quiet reasons:
+Not by a rounding error. The tracking looked healthy and the number was wrong, which is the combination that keeps you from looking.
 
-> Cached tokens bill at 1.25x to write and 0.10x to read, and the API reports them SEPARATELY from input_tokens. Skip that, understate every cached call.
-> Server-side web search costs $10 per 1,000 requests, on top of tokens.
-> Unknown model IDs. Most trackers return $0 for one they don't know, so a new model version is invisible to your cap.
+3 reasons, all quiet. The one worth knowing: most cost trackers return $0 for a model they don't recognize. So a new model version silently becomes free, which also makes it invisible to whatever budget cap you built on those numbers.
 
-That third one is dangerous. Mine returned 0.0, so a model missing from the price table silently bypassed the cap.
+Mine now prices anything unfamiliar at the most expensive tier. Overstate, never understate.
 
-It now falls back to the most expensive tier. Overstate, never understate.
+That generalizes well past AI. The number you trust is usually the one you never checked.
 
-Swap one line: Anthropic() becomes TrackedClient(). You get real per-run cost, and a run that blows its budget dies instead of burning a day's spend.
-
-I tested the cap on a deliberate runaway. It stopped after 1 call.
-
-pip install llm-run-guard
-
+Free, drop 5 of 12
 github.com/jlank31/marketing-engineer-tools
 
 ---
 
 ## Drop 6 — Wed Sep 9, 3:45pm ET
 
-A model update broke my pipeline. Here are the 20 lines that would have saved me.
+A model update broke my pipeline on a Friday.
 
-Claude 5 started returning its reasoning in the first slot of the response. Every piece of code I had that read content[0] as the answer got a thinking block, and crashed.
+Not gracefully. Hard stop, mid-run. The models started returning their reasoning first, so every line of code I had that grabbed the opening of a response grabbed the wrong thing.
 
-Not a subtle degradation. A hard stop, mid-run, on a Friday.
+20 lines to fix. Months of it working fine had taught me nothing about how fragile that assumption was.
 
-The fix is 20 lines: walk the content array and return the first block that's text. Drop 6 is that, plus the retry and repair layer around it.
+This week's drop is that fix, plus the retry layer around it. And the counters, which are the part worth stealing: they measure whether the expensive recovery path is earning its keep.
 
-The part worth stealing is the counters, not the code.
+Most of us build the safety net and never check whether it catches anything.
 
-The healing layer sends failures to a bigger model to diagnose, which is expensive. So it counts how often it does that, and how often the "heal" was a transient error a retry would have fixed for free.
-
-I added that because I suspected the expensive path wasn't earning its keep. Suspect the same about yours.
-
-pip install llm-run-guard
-
+Free, drop 6 of 12
 github.com/jlank31/marketing-engineer-tools
 
 ---
 
 ## Drop 7 — Wed Sep 16, 3:45pm ET
 
-The same editor cut the same word from my drafts 7 weeks in a row before I
-noticed.
+The same editor cut the same word from my drafts 7 weeks running before I noticed.
 
-Same word, 7 times. I only caught it because I eventually ran a diff.
+7 weeks. And I only caught it because I eventually ran a diff instead of reading.
 
-Drop 7 does that automatically. Feed it before-and-after pairs of anything a human has redlined and it tells you the pattern:
+Your editing history is training data you're already producing and almost certainly throwing away. Every redline is someone telling you their preferences in the clearest terms available.
 
-> Write "brands", not "vendors" (7x)
-> Cut "very" (5x), the editor removes it every time
+This week's tool reads before-and-after pairs and hands you the pattern. No API calls, nothing to configure. It's arithmetic on what changed.
 
-Then you paste that list into your AI prompt and the drafts stop making those
-mistakes.
+Then you paste that into your prompt and stop making those mistakes.
 
-It costs nothing to run. No API call. It's arithmetic on the text differences.
+Feedback you don't capture is feedback you get to receive again.
 
-One detail I'd have gotten wrong without shipping it: raw word diffs produce garbage. On a heavy rewrite you get "aren't" becomes "and founders are already", which would mis-train the prompt.
-
-So the prompt-facing list only takes swaps of 3 words or fewer. The human report keeps everything.
-
+Free, drop 7 of 12
 github.com/jlank31/marketing-engineer-tools
 
 ---
 
 ## Drop 8 — Wed Sep 23, 3:45pm ET
 
-3 SEO rules I taught clients that turned out to be wrong.
+3 things I taught clients that turned out to be wrong.
 
-1. "Open with a 40 to 60 word answer paragraph." I said this for a year. It traces to a 2017 study about where Google truncates a snippet box, not what gets cited. The one paper that tested structure found 150 to 300 words won. I had it backwards.
+I told people to open with a 40 to 60 word answer paragraph. Said it for a year. It traces back to a 2017 study about where Google truncates a snippet box, which is a different question from what gets cited. The one study that tested the thing directly found the opposite.
 
-2. "Every section should stand alone." Google indexes full pages and segments passages itself.
+I also taught that every section should stand alone, and that FAQ schema helps you get cited. Google removed FAQ rich results in May.
 
-3. "FAQ schema helps you get cited." Google removed FAQ rich results in May 2026.
+Writing that up was uncomfortable, which is probably the point. Most marketing advice never gets audited. It gets repeated confidently until someone checks.
 
-What it does reward: topic match, concrete specifics with named sources, and a confident un-hedged voice. That last one is the strongest effect measured in the field.
+Full writeup in the repo. Last of 12.
 
-Also: about 1% of people who see an AI summary click a source. Citations are a brand impression play, not a traffic play.
-
-Full writeup plus 7 B2B email sequences in the repo. Last of 12
+Thanks for reading along these last 3 months.
 
 github.com/jlank31/marketing-engineer-tools
