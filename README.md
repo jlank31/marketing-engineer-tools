@@ -33,6 +33,12 @@ pip install prose-tells
 prose-tells scan your-draft.md
 ```
 
+Building on the Claude API instead? The other package is one line:
+
+```bash
+pip install "llm-run-guard[anthropic]"
+```
+
 You'll get a list like this, quoting your own lines back at you:
 
 ```
@@ -64,13 +70,12 @@ FAIL  your-draft.md  (3 issues, 2 warnings)
 
 12 tools, one released each week. Plain English on what each one does and when you'd reach for it.
 
-**One tool is announced each week, but nothing gets held back.** Whatever is
-finished lives in the repo the day it's finished. If you land here in week 1 and
-poke around, you'll find more than week 1 announced. The weekly posts are how
-people hear about it, not a release gate.
+**Everything is available right now.** Nothing is gated behind its announcement
+date. The weekly schedule is when each tool gets *written about*, not when it
+becomes downloadable, so if you found this in week 1 you can take all of it today.
 
-The Status column is the honest bit: it tells you what you can install right now
-versus what's still being built.
+The dates are there so the announcements make sense, and so you know when to
+expect a writeup on the thinking behind each one.
 
 ### Shipping weekly, Wednesdays 3:45pm ET
 
@@ -78,10 +83,10 @@ versus what's still being built.
 |---|---|---|---|---|
 | 1 | Aug 5 | [**prose-tells**](packages/prose-tells) | **Ready** | A spell-checker for AI writing tells. Reads a draft and names the exact lines that read as machine-written: the "it's not X, it's Y" reversal, em dashes, stock openers, 25 overused phrases. It also catches things no other tool looks at, like whether every paragraph is the same length (a robot rhythm) or whether an article cites 3 real sources or just gestures at authority. **Use it** on anything before it goes live. |
 | 2 | Aug 12 | **Landing Page Copy Tournament** | **Ready** | Rewrites your landing page 8 different ways, then puts all 9 versions (yours competes as the 10th) in front of a 5-person judging panel: a skeptical CFO, a tired founder scrolling at midnight, a competitor, your ideal customer, and a conversion copywriter. **Use it** before a redesign, or to settle an argument about a headline. If your current page wins, it says so instead of inventing a rewrite. |
-| 3 | Aug 19 | **prose-tells `fix`** | Building | Same tool, but it edits instead of complaining. Strips em dashes, contracts "do not" to "don't", turns "52 percent" into "52%", and cuts empty words, repairing the punctuation around each cut so the sentence still reads. **Use it** as a final cleanup pass, or wire it into your repo so every content update gets checked automatically. |
+| 3 | Aug 19 | **prose-tells `fix`** | **Ready** | Same tool, but it edits instead of complaining. Strips em dashes, contracts "do not" to "don't", turns "52 percent" into "52%", and cuts empty words, repairing the punctuation around each cut so the sentence still reads. **Use it** as a final cleanup pass, or wire it into your repo so every content update gets checked automatically. |
 | 4 | Aug 26 | **CLAUDE.md Upgrader** + **Project Overlay** | **Ready** | Two tools for anyone using an AI coding assistant. One rewrites your project's instruction file so the AI behaves like a teammate. The other writes a permanent cheat sheet so it stops re-learning your project every session. **Use them** if you've ever answered the same question from your AI twice. |
-| 5 | Sep 2 | **llm-run-guard** | Building | A spend meter and an emergency brake for anyone building on the Claude API. Most cost tracking is quietly wrong: it misses cached tokens, misses web search charges, and reports $0 for any model it doesn't recognize, which silently switches off your budget cap. **Use it** if you've ever been surprised by an API bill. |
-| 6 | Sep 9 | **llm-run-guard: self-healing** | Building | The layer that keeps an AI pipeline running while you sleep. Retries failures, repairs malformed AI output, and escalates to a smarter model as a last resort. It also counts whether those expensive rescue calls were worth it, which most people never check. **Use it** on anything that runs unattended. |
+| 5 | Sep 2 | [**llm-run-guard**](packages/llm-run-guard) | **Ready** | A spend meter and an emergency brake for anyone building on the Claude API. Most cost tracking is quietly wrong: it misses cached tokens, misses web search charges, and reports $0 for any model it doesn't recognize, which silently switches off your budget cap. **Use it** if you've ever been surprised by an API bill. |
+| 6 | Sep 9 | **llm-run-guard: self-healing** | **Ready** | The layer that keeps an AI pipeline running while you sleep. Retries failures, repairs malformed AI output, and escalates to a smarter model as a last resort. It also counts whether those expensive rescue calls were worth it, which most people never check. **Use it** on anything that runs unattended. |
 | 7 | Sep 16 | **edit-digest** | Building | Learns your editor's style from their edits. Feed it before-and-after pairs and it tells you the pattern: *Write "brands", not "vendors" (7x). Cut "very" (5x), the editor removes it every time.* Paste that into your AI prompt and the drafts stop repeating the mistakes. Costs nothing to run, no API call. **Use it** monthly and watch your drafts need less editing each cycle. |
 | 8 | Sep 23 | **The AEO Retractions** + **B2B Email Sequences** | Building | An essay retracting 3 SEO rules I taught clients and now know are wrong, with every remaining rule labeled Confirmed, Plausible, or Folklore. Plus 7 complete B2B email sequences and a brand-voice checker. **Use it** to stop doing 3 things that don't work, and to skip the blank page on your next campaign. |
 
