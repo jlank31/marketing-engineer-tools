@@ -1,12 +1,12 @@
 ---
 name: project-cheat-sheet
 description: >
-  Generate a project-specific Claude skill overlay that encodes component inventory,
+  Generate a project-specific Claude skill cheat sheet that encodes component inventory,
   data models, agent responsibilities, naming conventions, canonical file paths, and
   known gotchas into a ~/.claude/skills/[project]/SKILL.md. Future sessions auto-load
   this context instead of re-deriving it, reducing re-reading and repeated questions.
   Use when starting work on a project repeatedly, after a major refactor, or when
-  Claude keeps asking questions it should already know. Triggers on: "create overlay
+  Claude keeps asking questions it should already know. Triggers on: "create cheat sheet
   for", "project cheat sheet", "generate project skill", "encode project context",
   "make a skill for [project]", "project-specific skill", "stop re-reading files".
 ---
@@ -18,8 +18,8 @@ every future session starts with full context pre-loaded — no re-reading, no r
 
 ## When to Use
 - Claude repeatedly reads the same files across sessions to derive context it should already have
-- Starting regular work on a project that doesn't yet have an overlay
-- After a major refactor that obsoletes the existing overlay
+- Starting regular work on a project that doesn't yet have a cheat sheet
+- After a major refactor that obsoletes the existing cheat sheet
 - When Claude asks questions it should already know (agent names, file paths, DB schema, component names)
 
 ---
@@ -66,7 +66,7 @@ Read in this order — stop when you have enough to fill all sections:
 - Current state summary (decision already made, active workstreams)
 - Files that must always be loaded together
 
-### Step 4: Write the Overlay
+### Step 4: Write the Cheat Sheet
 
 Write to: `~/.claude/skills/[project-name]/SKILL.md`
 
@@ -76,7 +76,7 @@ Use this template:
 ---
 name: [project-name]
 description: >
-  Project-specific context overlay for [project name]. [One sentence: what it does].
+  Project-specific cheat sheet for [project name]. [One sentence: what it does].
   Auto-load for any work in this project. Triggers on: "[project name]", "[key agent
   or component names]", "[main workflow keywords]", "[key file names]".
 ---
@@ -108,18 +108,18 @@ Report:
 - File written to (exact path)
 - How many sections filled
 - Top 3 trigger phrases that will activate it
-- Whether it replaced an existing overlay
+- Whether it replaced an existing cheat sheet
 
 ---
 
 ## Quality Bar
 
-A good overlay makes a cold session feel like a warm one. Test it mentally:
+A good cheat sheet makes a cold session feel like a warm one. Test it mentally:
 if someone opened a new Claude Code session, mentioned the project name, and asked
-a routine task — would they need to read any files first? If yes, the overlay is
+a routine task — would they need to read any files first? If yes, the cheat sheet is
 missing something.
 
-Bad overlay: "The project has agents that do research and email writing."
-Good overlay: "Maya (Sonnet 4.6) does prospect research via Google Places API +
+Bad cheat sheet: "The project has agents that do research and email writing."
+Good cheat sheet: "Maya (Sonnet 4.6) does prospect research via Google Places API +
 Perplexity. Jake (Sonnet 4.6) writes HVAC cold emails from Maya's output. Dana
 (Haiku 4.5) runs a 7-point QC checklist before emails go to the Sheet."

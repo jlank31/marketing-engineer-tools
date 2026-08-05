@@ -11,8 +11,8 @@ DEST="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 shopt -s nullglob
 skills=("$SRC"/*/)
 if [ ${#skills[@]} -eq 0 ]; then
-  echo "No skills yet — the first one ships Aug 10 2026."
-  exit 0
+  echo "No skills found in $SRC. Is this a full checkout?"
+  exit 1
 fi
 
 mkdir -p "$DEST"

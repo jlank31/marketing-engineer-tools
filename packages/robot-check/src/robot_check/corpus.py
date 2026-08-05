@@ -188,7 +188,7 @@ def render(report: CorpusReport, limit: int = 12) -> str:
     if report.clean:
         lines.append(
             "\n  No cross-document repetition found."
-            "\n  Worth noting this only looks for reuse, not for quality — and with a"
+            "\n  Worth noting this only looks for reuse, not for quality, and with a"
             "\n  small corpus there simply isn't much to find yet."
         )
         return "\n".join(lines)
@@ -218,7 +218,7 @@ def render(report: CorpusReport, limit: int = 12) -> str:
         lines.append(
             "\n  These are candidates, not violations. Some repetition is your"
             "\n  positioning working. Promote the ones you want to retire to a"
-            "\n  banned list yourself — nothing here should graduate automatically."
+            "\n  banned list yourself. Nothing here should graduate automatically."
         )
 
     return "\n".join(lines)

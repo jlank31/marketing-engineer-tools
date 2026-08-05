@@ -2,7 +2,7 @@
 
 All notable changes to `robot-check`.
 
-## 0.1.0 — 2026-08-03
+## 0.1.0 - 2026-08-05
 
 First release. Lexical + statistical per-text detectors (`content_quality`) and
 corpus-level reuse detection (`repetition`), plus the `scan` CLI.

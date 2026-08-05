@@ -46,7 +46,7 @@ Writing every section to stand alone means restating context you already establi
 
 That's the pattern worth noticing: the tactic outlived the reason for the tactic, and nobody re-checked.
 
-**What I'd say now:** schema is fine for what it does. It is not a citation lever. Neither is `llms.txt` — one audit of 137,210 domains found **97%** of those files were never fetched once.
+**What I'd say now:** schema is fine for what it does. It is not a citation lever. Neither is `llms.txt`. One audit of 137,210 domains found **97%** of those files were never fetched once.
 
 **Label:** Folklore.
 

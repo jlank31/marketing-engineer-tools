@@ -1,6 +1,6 @@
 # editor-rules
 
-Learn an editor's style from what they actually change.
+Learn an editor's style from what they change.
 
 ```bash
 pip install editor-rules
@@ -50,7 +50,7 @@ Look at that third substitution in the output above, the one marked `(report onl
 3x   "aren't" -> "and founders are already"
 ```
 
-That's not a preference. It's an artifact of how the diff aligned a heavy rewrite. Feed it into a prompt and you've confidently taught the model something false.
+That's an artifact of how the diff aligned a heavy rewrite, not a preference. Feed it into a prompt and you've confidently taught the model something false.
 
 So `--prompt-block` only takes swaps where **both sides are 3 words or fewer** and **the replacement is no longer than the original**. The full report keeps everything, because a person can spot an artifact and a prompt cannot.
 

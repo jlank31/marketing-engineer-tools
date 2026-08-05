@@ -1,6 +1,6 @@
 # Support
 
-**Status: active.** 12 drops shipping weekly Aug 3 – Sep 21 2026, then maintenance mode.
+**Status: active.** 8 drops shipping weekly Aug 5 to Sep 23 2026, then maintenance mode. Every tool is already downloadable; the schedule is when each one gets written about.
 
 Maintenance mode means bugs and price-table updates get fixed. It does not mean new features. That's stated up front so October's quiet doesn't read as abandonment.
 
@@ -8,10 +8,10 @@ Maintenance mode means bugs and price-table updates get fixed. It does not mean 
 
 | You have | Go to |
 |---|---|
-| A bug, crash, or false positive | [Issues](https://github.com/jlank31/marketing-engineer-tools/issues/new/choose) — needs a minimal reproduction |
+| A bug, crash, or false positive | [Issues](https://github.com/jlank31/marketing-engineer-tools/issues/new/choose). Needs a minimal reproduction |
 | A question, or "how would I use this for X" | [Discussions](https://github.com/jlank31/marketing-engineer-tools/discussions) |
-| A security problem | [SECURITY.md](SECURITY.md) — not a public issue |
-| A patch | [CONTRIBUTING.md](CONTRIBUTING.md) — read the mirrored-files note first |
+| A security problem | [SECURITY.md](SECURITY.md). Not a public issue |
+| A patch | [CONTRIBUTING.md](CONTRIBUTING.md). Read the mirrored-files note first |
 
 Response is best effort, usually weekends.
 

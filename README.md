@@ -1,8 +1,12 @@
 # marketing-engineer-tools
 
+[![CI](https://github.com/jlank31/marketing-engineer-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/jlank31/marketing-engineer-tools/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/downloads/)
+
 ![Marketing tooling](docs/assets/marketing-dashboard.jpeg)
 
-Free tools for people who publish a lot and can't afford for it to read like a robot wrote it.
+Free tools for people who publish with AI, and for the people who build the pipelines.
 
 Everything here was pulled out of a content pipeline that has shipped work for real clients, every single week, since April 2026. None of it is theoretical. Each guardrail exists because something went wrong once and I didn't want it to happen twice.
 
@@ -39,7 +43,7 @@ The other two packages:
 
 ```bash
 pip install "llm-cost[anthropic]"   # real API cost tracking + a budget cap
-pip install editor-rules                  # learn an editor's style from their edits
+pip install editor-rules            # learn an editor's style from their edits
 ```
 
 You'll get a list like this, quoting your own lines back at you:
@@ -71,40 +75,39 @@ FAIL  your-draft.md  (3 issues, 2 warnings)
 
 ## Everything in here
 
-12 tools, one released each week. Plain English on what each one does and when you'd reach for it.
+Seven tools and one essay, in two groups: things that improve what you write,
+and things that keep what you build from falling over.
 
-**Everything is available right now.** Nothing is gated behind its announcement
-date. The weekly schedule is when each tool gets *written about*, not when it
-becomes downloadable, so if you found this in week 1 you can take all of it today.
+**All of it is downloadable today.** Nothing is gated behind an announcement
+date. The weekly schedule below is when each one gets *written about*, not when
+it becomes available, so if you found this in week 1 you can take everything.
 
-The dates are there so the announcements make sense, and so you know when to
-expect a writeup on the thinking behind each one.
+There are 8 weekly announcements and 7 tools because `robot-check` gets three of
+them (`scan`, `fix`, `corpus`) and `llm-cost` gets two. Announcements are
+Wednesdays, 3:45pm ET, Aug 5 to Sep 23 2026.
 
-### Shipping weekly, Wednesdays 3:45pm ET
+### Writing and content
 
-| # | Date | Tool | Status | What it does, and when you'd use it |
-|---|---|---|---|---|
-| 1 | Aug 5 | [**robot-check**](packages/robot-check) | **Ready** | A spell-checker for AI writing tells. Reads a draft and names the exact lines that read as machine-written: the "it's not X, it's Y" reversal, em dashes, stock openers, 25 overused phrases. It also catches things no other tool looks at, like whether every paragraph is the same length (a robot rhythm) or whether an article cites 3 real sources or just gestures at authority. **Use it** on anything before it goes live. |
-| 2 | Aug 12 | **Landing Page Copy Tournament** | **Ready** | Rewrites your landing page 8 different ways, then puts all 9 versions (yours competes as the 10th) in front of a 5-person judging panel: a skeptical CFO, a tired founder scrolling at midnight, a competitor, your ideal customer, and a conversion copywriter. **Use it** before a redesign, or to settle an argument about a headline. If your current page wins, it says so instead of inventing a rewrite. |
-| 3 | Aug 19 | **robot-check `fix`** | **Ready** | Same tool, but it edits instead of complaining. Strips em dashes, contracts "do not" to "don't", turns "52 percent" into "52%", and cuts empty words, repairing the punctuation around each cut so the sentence still reads. **Use it** as a final cleanup pass, or wire it into your repo so every content update gets checked automatically. |
-| 4 | Aug 26 | **CLAUDE.md Upgrader** + **Project Cheat Sheet** | **Ready** | Two tools for anyone using an AI coding assistant. One rewrites your project's instruction file so the AI behaves like a teammate. The other writes a permanent cheat sheet so it stops re-learning your project every session. **Use them** if you've ever answered the same question from your AI twice. |
-| 5 | Sep 2 | [**llm-cost**](packages/llm-cost) | **Ready** | A spend meter and an emergency brake for anyone building on the Claude API. Most cost tracking is quietly wrong: it misses cached tokens, misses web search charges, and reports $0 for any model it doesn't recognize, which silently switches off your budget cap. **Use it** if you've ever been surprised by an API bill. |
-| 6 | Sep 9 | **llm-cost: self-healing** | **Ready** | The layer that keeps an AI pipeline running while you sleep. Retries failures, repairs malformed AI output, and escalates to a smarter model as a last resort. It also counts whether those expensive rescue calls were worth it, which most people never check. **Use it** on anything that runs unattended. |
-| 7 | Sep 16 | [**editor-rules**](packages/editor-rules) | **Ready** | Learns your editor's style from their edits. Feed it before-and-after pairs and it tells you the pattern: *Write "brands", not "vendors" (7x). Cut "very" (5x), the editor removes it every time.* Paste that into your AI prompt and the drafts stop repeating the mistakes. Costs nothing to run, no API call. **Use it** monthly and watch your drafts need less editing each cycle. |
-| 8 | Sep 23 | [**The AEO Retractions**](docs/essays/aeo-retractions.md) | **Ready** | An essay retracting 3 SEO rules I taught clients and now know are wrong, with every remaining rule labeled Confirmed, Plausible, or Folklore. **Use it** to stop doing 3 things that don't work, and to set honest expectations before someone quotes you a traffic number that doesn't survive checking. |
-
-### Bonus tools
-
-These don't get their own launch week. `corpus` ships inside robot-check from day
-one, so if you install drop 1 you already have it. The rest land whenever they're
-done.
-
-| Tool | Status | What it does, and when you'd use it |
+| Tool | Written up | What it does, and when you'd use it |
 |---|---|---|
-| **robot-check `corpus`** | **Ready** | Reads your *entire* published archive at once and shows where you've started repeating yourself: the anecdote you've told word for word 3 times, the same 5 statistics recycled across 4 posts, the same opening move in 5 of your last 6 articles. Each post looks fine alone. The sameness only shows up across the whole library. **Use it** once a quarter. Expect it to be uncomfortable. |
-| **Pitch Deck Builder** | Building | Builds an investor, partner, or client deck slide by slide with speaker notes, blending 5 proven narrative frameworks and adapting the mix to who's in the room. Output pastes straight into Gamma or Google Slides. **Use it** when you're staring at slide 1. |
-| **Marketing Folklore Registry** | Building | A running list of marketing statistics that get repeated everywhere and are provably wrong, plus a checker that flags them in your draft. **Use it** before your next strategy deck, so you don't cite something that falls apart when someone checks. |
-| **Email Deliverability Checklist** | Building | A one-page pre-send checklist covering the technical setup that decides whether your campaign lands in the inbox or in spam. **Use it** before every send. The most boring thing here and probably the most useful. |
+| [**robot-check**](packages/robot-check) | Aug 5 | A spell-checker for AI writing tells. Reads a draft and names the exact lines that read as machine-written: the "it's not X, it's Y" reversal, em dashes, stock openers, 25 overused phrases. It also catches things no other tool looks at, like whether every paragraph is the same length (a robot rhythm) or whether an article cites 3 real sources or just gestures at authority. **Use it** on anything before it goes live. |
+| [**Landing Page Copy Tournament**](skills/landing-page-tournament) | Aug 12 | Rewrites your landing page 8 different ways, then puts all 9 versions (yours competes too) in front of a 5-person judging panel: a skeptical CFO, a tired founder scrolling at midnight, a competitor, your ideal customer, and a conversion copywriter. **Use it** before a redesign, or to settle an argument about a headline. If your current page wins, it says so instead of inventing a rewrite. |
+| [**robot-check `fix`**](packages/robot-check) | Aug 19 | The same rules, but editing instead of complaining. Strips em dashes, contracts "do not" to "don't", turns "52 percent" into "52%", and cuts empty words, repairing the punctuation around each cut so the sentence still reads. **Available now as a Python API**: `from robot_check import strip_em_dashes, apply_contractions`. The `fix` subcommand lands with its writeup on Aug 19. |
+| [**robot-check `corpus`**](packages/robot-check) | bonus, ships with drop 1 | Reads your *entire* published archive at once and shows where you've started repeating yourself: the anecdote you've told word for word 3 times, the same 5 statistics recycled across 4 posts, the same opening move in 5 of your last 6 articles. Each post looks fine alone. The sameness only shows up across the whole library. **Use it** once a quarter. Expect it to be uncomfortable. |
+| [**editor-rules**](packages/editor-rules) | Sep 16 | Learns your editor's style from their edits. Feed it before-and-after pairs and it tells you the pattern: *Write "brands", not "vendors" (7x). Cut "very" (5x), the editor removes it every time.* Paste that into your AI prompt and the drafts stop repeating the mistakes. Costs nothing to run, no API call. **Use it** monthly and watch your drafts need less editing each cycle. |
+| [**The AEO Retractions**](docs/essays/aeo-retractions.md) | Sep 23 | An essay retracting 3 SEO rules I taught clients and now know are wrong, with every remaining rule labeled Confirmed, Plausible, or Folklore. **Use it** to stop doing 3 things that don't work, and to set honest expectations before someone quotes you a traffic number that doesn't survive checking. |
+
+### Building with AI
+
+| Tool | Written up | What it does, and when you'd use it |
+|---|---|---|
+| [**CLAUDE.md Upgrader**](skills/claude-md-upgrader) + [**Project Cheat Sheet**](skills/project-cheat-sheet) | Aug 26 | Two tools for anyone using an AI coding assistant. One rewrites your project's instruction file so the assistant behaves like a teammate. The other writes a permanent cheat sheet so it stops re-learning your project every session. **Use them** if you've ever answered the same question from your assistant twice. |
+| [**llm-cost**](packages/llm-cost) | Sep 2 | A spend meter and an emergency brake for anyone building on the Claude API. Most cost tracking is quietly wrong: it misses cached tokens, misses web search charges, and reports $0 for any model it doesn't recognize, which silently switches off your budget cap. **Use it** if you've ever been surprised by an API bill. |
+| [**llm-cost: self-healing**](packages/llm-cost) | Sep 9 | The layer that keeps an AI pipeline running while you sleep. Retries failures, repairs malformed AI output, and escalates to a smarter model as a last resort. It also counts whether those expensive rescue calls were worth it, which most people never check. **Use it** on anything that runs unattended. |
+
+Three more are planned but not written yet, and they're kept out of the tables
+above on purpose so nothing here points at something that doesn't exist. See
+[ROADMAP.md](ROADMAP.md).
 
 ---
 
@@ -124,11 +127,13 @@ That's in here, with the fix and the test.
 
 ### Yes, this README fails its own checker
 
-Run `robot-check scan README.md` and you'll get about 10 hits. Almost all of them are quotes.
+Run `robot-check scan README.md` and you'll get 10 issues and 4 warnings. Every one of them is a quote or a side effect of what this page is.
 
 This page demonstrates the tells it detects, so it contains them: "In today's fast-paced landscape" and "You're not alone" appear in the sample output above, and the "It's not X. It's Y." story quotes that pattern 3 times on purpose.
 
 That's a real limitation worth knowing before you rely on it. **The checker can't tell the difference between using a phrase and quoting one.** If you write about bad copy, or quote a competitor, or include an example of what not to do, expect a flag and use your judgment.
+
+The warnings show the other half of the limitation. It counts 20 all-caps words and calls that AI formatting, but they're the badges at the top of this page (CI, MIT, LICENSE) plus initialisms. It flags 3 consecutive lines starting with `[issue]`, which is a code block of the tool's own output. A checker that reads markdown as prose will do this. Read the flag, then decide.
 
 It caught one genuine slip in here too, which is the more useful half of the story: I'd written "three ways people actually use it" in a document that bans "actually." Fixed.
 
@@ -142,7 +147,7 @@ It caught one genuine slip in here too, which is the more useful half of the sto
 
 ## Scope, stated up front
 
-**12 drops, one a week, Aug 5 to Sep 23 2026. Then maintenance mode.**
+**8 drops, one a week, Aug 5 to Sep 23 2026. Then maintenance mode.**
 
 This is a deliberate run with an ending, not a project that gets abandoned in October. Maintenance means bugs and price updates keep getting fixed. When the weekly drops stop, that's the plan working, not the project dying.
 

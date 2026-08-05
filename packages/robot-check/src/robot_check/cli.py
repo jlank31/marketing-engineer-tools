@@ -131,8 +131,8 @@ def _scan(args) -> int:
     if not reports:
         return max(worst, 2)
     if worst == 0:
-        print("\nNo issues. Worth remembering this checks for tells, not for quality —")
-        print("clean output is a floor, not a finished piece.")
+        print("\nNo issues. Worth remembering this checks for tells, not for quality.")
+        print("Clean output is a floor, not a finished piece.")
     return worst
 
 
@@ -199,14 +199,14 @@ def build_parser() -> argparse.ArgumentParser:
         help="read a whole archive and report where it repeats itself",
         description="Cross-document analysis: verbatim reuse, echoed openers, "
                     "recycled stat blocks, and phrases that recur across many "
-                    "pieces. Findings, not verdicts — always exits 0.",
+                    "pieces. Findings, not verdicts. Always exits 0.",
     )
     c.add_argument("dir", help="directory of published work")
     c.add_argument("--pattern", default="*.md",
                    help="glob for files to include (default: *.md)")
     c.add_argument("--exclude-section", default="", metavar="REGEX",
                    help="drop markdown sections whose heading matches, e.g. "
-                        "'image prompt|schema' — production metadata repeats "
+                        "'image prompt|schema'. Production metadata repeats "
                         "across every file and swamps real findings")
     c.add_argument("--min-run", type=int, default=8, metavar="N",
                    help="word-run length that counts as verbatim reuse (default: 8)")
