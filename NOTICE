@@ -1,4 +1,4 @@
-marketing-engineer
+marketing-engineer-tools
 Copyright (c) 2026 Jared Castronova / JAC Growth Marketing LLC
 
 This product includes software developed by the copyright holder.
@@ -14,6 +14,6 @@ Policy: any code adapted from a third party gets an entry in this file AND
 keeps its in-file docstring credit. Before adapted code is published, the
 upstream LICENSE is read and recorded here. If the upstream license cannot be
 located, or is incompatible with MIT redistribution, the code is not published
-here — it stays private or gets reimplemented from scratch.
+here. It stays private or gets reimplemented from scratch.
 
 That policy has already excluded one module from this repo.

@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "robot-check"
+version = "0.1.0"
+description = "Find the lines that make copy read as machine-written. Zero dependencies."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Jared Castronova" }]
+keywords = ["ai-detection", "content-quality", "linter", "writing", "editorial", "slop"]
+
+# Deliberately empty, and it stays that way. "Drops into any repo with no
+# dependency graph" is the whole product claim, and CI enforces it with an AST
+# walk over every module, including imports inside function bodies, which is
+# how the one historical violation slipped in.
+dependencies = []
+
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Text Processing :: Linguistic",
+  "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/jlank31/marketing-engineer-tools"
+Source = "https://github.com/jlank31/marketing-engineer-tools/tree/main/packages/robot-check"
+Changelog = "https://github.com/jlank31/marketing-engineer-tools/blob/main/packages/robot-check/CHANGELOG.md"
+
+[project.scripts]
+robot-check = "robot_check.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/robot_check"]

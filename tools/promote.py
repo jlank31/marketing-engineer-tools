@@ -9,7 +9,7 @@ Run from the public repo:
 Design constraints, both load-bearing:
 
 1. NOTHING PRIVATE EVER IMPORTS THIS REPO. The public copy is strictly
-   downstream. That is what makes it safe to skip a promote for three weeks —
+   downstream. That is what makes it safe to skip a promote for three weeks,
    and, more importantly, what means an 11pm fix to a detector that just let
    something bad through never waits on a PyPI publish.
 
@@ -17,7 +17,7 @@ Design constraints, both load-bearing:
    docstrings, no "strip the header" magic. A generated docstring is not
    reviewable; a literal find/replace pair is. If a file needs more than
    MAX_SUBS substitutions it is a FORK, not a mirror, and belongs in FORKS
-   below with a note — silently maintaining a heavily-transformed copy is how
+   below with a note. Silently maintaining a heavily-transformed copy is how
    the two versions quietly diverge.
 
 This script never commits and never pushes. It copies, verifies, prints a diff
@@ -32,7 +32,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PKG = ROOT / "packages/prose-tells/src/prose_tells"
+PKG = ROOT / "packages/robot-check/src/robot_check"
 
 MAX_SUBS = 5
 
@@ -71,29 +71,41 @@ MIRRORS: list[Mirror] = [
         "utils/repetition.py",
         PKG / "repetition.py",
         subs=[
-            Sub("`utils.post_validators`", "`prose_tells.post_validators`"),
+            Sub("`utils.post_validators`", "`robot_check.post_validators`"),
             # Names a private module with no public counterpart. Rewritten to
             # describe the distinction rather than point at a file nobody has.
             Sub(
                 "Deliberately separate from\n`agents.angle_diversity` — that gate dedupes angle TITLES/summaries at\nideation; this one compares finished BODY COPY.",
-                "Deliberately separate from\nan idea-dedup gate — that compares angle TITLES at planning time;\nthis one compares finished BODY COPY.",
+                "Deliberately separate from\nan idea-dedup gate, which compares angle TITLES at planning time;\nthis one compares finished BODY COPY.",
             ),
             # Consumer list: three private file paths that don't exist here.
             Sub(
                 "No pipeline deps (importable from scripts, QC, and skills). Consumers:\n`scripts/lint_week.py` (cross-week + intra-week report), `agents/blog_qc.py`\n(sibling stat-fingerprint), `scripts/scan_worn_phrases.py` (--suggest corpus\ncounting). All findings are SOFT — the human review gate decides.",
-                "No dependencies at all, so this imports cleanly from a CLI, a QC gate, or\na notebook. All findings are SOFT by design — they surface candidates for a\nhuman to judge, and none of them should ever block a publish on their own.",
+                "No dependencies at all, so this imports cleanly from a CLI, a QC gate, or\na notebook. All findings are SOFT by design: they surface candidates for a\nhuman to judge, and none of them should ever block a publish on their own.",
             ),
         ],
     ),
     # Unblocked 2026-07-30: find_stale_event_reference now takes an `events=`
     # parameter, so this file is stdlib-only and publishable.
-    Mirror("utils/post_validators.py", PKG / "post_validators.py"),
+    Mirror(
+        "utils/post_validators.py",
+        PKG / "post_validators.py",
+        subs=[
+            # Names a private loader with no public counterpart. Caught by
+            # check_brand_leak.py on 2026-08-05, when upstream drift brought
+            # five new detectors across with this pointer in a docstring.
+            Sub(
+                "DATA (data/worn_phrases.json via utils.file_loader.load_worn_phrases),\n    curated by a human without a code change, and it differs per client.",
+                "DATA: a JSON list you maintain by hand without a code change, and it\n    can differ from one project to the next.",
+            ),
+        ],
+    ),
 ]
 
 # Files deliberately NOT mirrored, recorded so the reason survives.
 FORKS = {
     "tracker.py": "Public UsageRecord dataclass vs the private pydantic row type. "
-                  "60 lines of accumulator plumbing — drift here costs nothing, "
+                  "60 lines of accumulator plumbing. Drift here costs nothing, "
                   "unlike the detector engine where drift is a correctness bug.",
 }
 
@@ -121,7 +133,7 @@ def promote_one(m: Mirror, private_root: Path) -> tuple[bool, list[str]]:
                 return False, [
                     f"  {m.private_rel}: required substitution did not match.",
                     f"    looked for: {s.find[:70]!r}",
-                    "    The upstream text changed. Update the manifest — do NOT"
+                    "    The upstream text changed. Update the manifest. Do NOT"
                     " publish with a stale rule, or a private reference ships.",
                 ]
             notes.append(f"  {m.private_rel}: optional substitution skipped (no match)")
@@ -142,10 +154,12 @@ def promote_one(m: Mirror, private_root: Path) -> tuple[bool, list[str]]:
 
 def write_hashes() -> Path:
     """Record public-copy hashes so CI can detect a direct edit to a mirrored file."""
-    out = ROOT / "packages/prose-tells/VENDORED.sha256"
+    # Derived from PKG, not hardcoded: a package rename must not be able to
+    # split the hash file away from the files it pins.
+    out = PKG.parents[1] / "VENDORED.sha256"
     lines = [
-        "# Mirrored from a private upstream. Do not edit these files here —",
-        "# see CONTRIBUTING.md. Regenerated by tools/promote.py.",
+        "# Mirrored from a private upstream. Do not edit these files here.",
+        "# See CONTRIBUTING.md. Regenerated by tools/promote.py.",
     ]
     for m in MIRRORS:
         if m.public_path.exists():
@@ -172,7 +186,7 @@ def main() -> int:
         for n in notes:
             print(n)
     if not ok:
-        print("\n  PROMOTE FAILED — nothing further was run.")
+        print("\n  PROMOTE FAILED. Nothing further was run.")
         return 1
 
     h = write_hashes()

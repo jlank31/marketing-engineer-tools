@@ -1,0 +1,68 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1280px; height:640px; }
+  body {
+    background:#0d1117;
+    font-family:"SF Mono",Menlo,Monaco,monospace;
+    color:#e6edf3;
+    padding:56px 64px;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .top { display:flex; align-items:baseline; gap:18px; }
+  .name { font-size:34px; font-weight:700; letter-spacing:-.5px; }
+  .by { font-size:19px; color:#7d8590; }
+  .tag {
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,sans-serif;
+    font-size:25px; color:#c9d1d9; margin-top:14px; line-height:1.45; max-width:1050px;
+  }
+  .term {
+    background:#010409; border:1px solid #30363d; border-radius:10px;
+    padding:26px 30px; font-size:19px; line-height:1.72;
+  }
+  .p { color:#7ee787; }
+  .cmd { color:#e6edf3; }
+  .fail { color:#ff7b72; font-weight:700; }
+  .lbl { color:#d29922; }
+  .q { color:#a5d6ff; }
+  .dim { color:#7d8590; }
+  .bot {
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:19px; color:#7d8590;
+  }
+  .pills { display:flex; gap:10px; }
+  .pill {
+    border:1px solid #30363d; border-radius:999px; padding:6px 15px;
+    font-size:16px; color:#c9d1d9;
+  }
+</style>
+<body>
+  <div>
+    <div class="top">
+      <div class="name">marketing-engineer-tools</div>
+      <div class="by">by Jared Castronova</div>
+    </div>
+    <div class="tag">Free tools for people who publish with AI, and for the people who build the pipelines.</div>
+  </div>
+
+  <div class="term">
+    <div><span class="p">$</span> <span class="cmd">pip install robot-check</span></div>
+    <div><span class="p">$</span> <span class="cmd">robot-check scan draft.md</span></div>
+    <div>&nbsp;</div>
+    <div><span class="fail">FAIL</span>&nbsp;&nbsp;draft.md&nbsp;&nbsp;<span class="dim">(9 issues, 0 warnings)</span></div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="lbl">[issue]</span> Banned AI word <span class="q">'landscape'</span>. Replace with a natural alternative.</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="lbl">[issue]</span> Contrast/reversal pattern: <span class="q">"'s not a tooling problem. It's"</span>.</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="lbl">[issue]</span> Hollow opener: <span class="q">"In today's fast-paced landscape"</span>.</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="lbl">[issue]</span> Empty intensifier: <span class="q">"actually"</span> <span class="dim">(x3)</span>.</div></div>
+
+  <div class="bot">
+    <div class="pills">
+      <div class="pill">robot-check</div>
+      <div class="pill">llm-cost</div>
+      <div class="pill">editor-rules</div>
+      <div class="pill">3 Claude Code skills</div>
+    </div>
+    <div>MIT&nbsp;&nbsp;·&nbsp;&nbsp;zero dependencies</div>
+  </div>
+</body>

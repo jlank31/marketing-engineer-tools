@@ -5,8 +5,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        A false positive counts as a bug and is genuinely useful to hear about —
-        these detectors are tuned to under-report, so one that cries wolf is a
+        A false positive counts as a bug and is genuinely useful to hear about.
+        These detectors are tuned to under-report, so one that cries wolf is a
         real defect.
   - type: textarea
     id: input
@@ -26,6 +26,6 @@ body:
     id: version
     attributes:
       label: Version
-      description: "`prose-tells --version`, and your Python version"
+      description: "`robot-check --version`, and your Python version"
     validations:
       required: true

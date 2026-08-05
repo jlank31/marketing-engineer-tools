@@ -194,7 +194,7 @@ return {
 
 ## Notes for reuse
 
-- **KNOWN BUG (observed 2026-07-13, run wf_8fb3fd96-5a2):** args-interpolated strings (`${copySheet}`, `${brandBrief}`) reached the phase-1 writer agents correctly but arrived as `undefined` in later-phase judge/merge/QC prompts. Mitigation: ALWAYS save copy-sheet.md and brand-brief.md to the run directory before launching the workflow, and include their absolute file paths in every agent prompt ("If the text above reads 'undefined', Read <path> instead") — subagents have file access and recover cleanly. Additionally, run a separate blind head-to-head validation (baseline vs merged, texts embedded directly via the Agent tool) before claiming the merge beat the baseline.
+- **KNOWN BUG (observed 2026-07-13, run wf_8fb3fd96-5a2):** args-interpolated strings (`${copySheet}`, `${brandBrief}`) reached the phase-1 writer agents correctly but arrived as `undefined` in later-phase judge/merge/QC prompts. Mitigation: ALWAYS save copy-sheet.md and brand-brief.md to the run directory before launching the workflow, and include their absolute file paths in every agent prompt ("If the text above reads 'undefined', Read <path> instead"). Subagents have file access and recover cleanly. Additionally, run a separate blind head-to-head validation (baseline vs merged, texts embedded directly via the Agent tool) before claiming the merge beat the baseline.
 
 - Adapt `ANGLES` and the `icp-customer` / `midnight-founder` personas to the brand brief's actual ICP; everything else is brand-agnostic.
 - The section list inside `judgePrompt` step 2 should match the copy sheet's actual `##` headings.

@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # The three workflows pin action versions. Without this they quietly rot,
+  # and a public repo running a stale action is a bad look on a security page.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "ci"
+    labels:
+      - dependencies
+
+  # The packages are stdlib-only by design (CI enforces it with an AST walk),
+  # so this exists for the dev/test extras, not for runtime dependencies.
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "deps"
+    labels:
+      - dependencies

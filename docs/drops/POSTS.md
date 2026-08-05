@@ -1,4 +1,4 @@
-# LinkedIn posts — 8 drops
+# LinkedIn posts: 8 drops
 
 **Cadence: Wednesdays, 3:45pm ET.** Personal account, manual post.
 
@@ -25,7 +25,7 @@ Repo goes public before drop 1:
 
 ---
 
-## Drop 1 — Wed Aug 5, 3:45pm ET
+## Drop 1: Wed Aug 5, 3:45pm ET
 
 I've been building a nice repo of skills and tools, so starting today I'm open-sourcing a bunch of them
 
@@ -37,7 +37,7 @@ I firmly believe we should all be getting smarter together
 
 If it's useful, a like and a share help other people find it
 
-Here's some info on the first one, prose-tells
+Here's some info on the first one, robot-check
 
 AI detectors tell you "87% likely AI." That's useless to an editor. It doesn't tell you which line to change.
 
@@ -60,7 +60,7 @@ New drop every Wednesday
 
 ---
 
-## Drop 2 — Wed Aug 12, 3:45pm ET
+## Drop 2: Wed Aug 12, 3:45pm ET
 
 Every AI copy tool has the same blind spot
 
@@ -90,7 +90,7 @@ Drop 2 of 12
 
 ---
 
-## Drop 3 — Wed Aug 19, 3:45pm ET
+## Drop 3: Wed Aug 19, 3:45pm ET
 
 Every AI writing checker hands you a list and walks away
 
@@ -117,7 +117,7 @@ Drop 3 of 12
 
 ---
 
-## Drop 4 — Wed Aug 26, 3:45pm ET
+## Drop 4: Wed Aug 26, 3:45pm ET
 
 If you use an AI coding assistant you've had this week
 
@@ -142,7 +142,7 @@ Drop 4 of 12
 
 ---
 
-## Drop 5 — Wed Sep 2, 3:45pm ET
+## Drop 5: Wed Sep 2, 3:45pm ET
 
 I was under-reporting my own Claude API spend for months and had no idea
 
@@ -168,7 +168,7 @@ Drop 5 of 12
 
 ---
 
-## Drop 6 — Wed Sep 9, 3:45pm ET
+## Drop 6: Wed Sep 9, 3:45pm ET
 
 A model update broke my pipeline on a Friday
 
@@ -194,7 +194,7 @@ Drop 6 of 12
 
 ---
 
-## Drop 7 — Wed Sep 16, 3:45pm ET
+## Drop 7: Wed Sep 16, 3:45pm ET
 
 The same editor cut the same word from my drafts 7 weeks running before I noticed
 
@@ -223,7 +223,7 @@ Drop 7 of 12
 
 ---
 
-## Drop 8 — Wed Sep 23, 3:45pm ET
+## Drop 8: Wed Sep 23, 3:45pm ET
 
 Three SEO rules I taught clients that turned out to be wrong
 

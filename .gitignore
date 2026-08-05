@@ -15,7 +15,7 @@ venv/
 .coverage
 htmlcov/
 
-# Secrets — nothing here should ever hold one, but belt and braces.
+# Secrets. Nothing here should ever hold one, but belt and braces.
 .env
 .env.*
 !.env.example

@@ -1,7 +1,7 @@
 <!--
 Before you spend time on this: some files here are MIRRORED from a private
 upstream and cannot be merged if edited directly. `make mirror` will tell you.
-A patch to a mirrored file is still welcome — it gets replayed upstream and
+A patch to a mirrored file is still welcome. It gets replayed upstream and
 lands on the next sync. See CONTRIBUTING.md.
 -->
 

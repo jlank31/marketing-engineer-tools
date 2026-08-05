@@ -5,4 +5,4 @@ contact_links:
     about: Questions, ideas, and "how would I use this for X" go in Discussions.
   - name: Contribution policy
     url: https://github.com/jlank31/marketing-engineer-tools/blob/main/CONTRIBUTING.md
-    about: Read this first — some files are mirrored and cannot be edited directly.
+    about: Read this first. Some files are mirrored and cannot be edited directly.

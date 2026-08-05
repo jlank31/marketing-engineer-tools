@@ -3,8 +3,8 @@
 
 Four families, ordered by how bad it is if one ships:
 
-  CRITICAL  live credentials — anything that grants access
-  IDENTITY  infra identifiers — project refs, service accounts, doc IDs, portal
+  CRITICAL  live credentials: anything that grants access
+  IDENTITY  infra identifiers: project refs, service accounts, doc IDs, portal
             IDs, email addresses. Not credentials, but they let someone
             enumerate or target the private system.
   CLIENT    client / prospect / person names and internal codenames
@@ -14,7 +14,7 @@ Four families, ordered by how bad it is if one ships:
 
 Why this runs repo-wide and not just over mirrored files: the mirrored files are
 already guarded upstream by the private repo's test_vendor_sync.py. The leak risk
-here is everything ELSE — a README example, a test fixture, a drop note written
+here is everything ELSE: a README example, a test fixture, a drop note written
 in a hurry at 11pm.
 
 Usage:
@@ -61,7 +61,7 @@ RULES: list[tuple[str, str, re.Pattern[str]]] = [
     ("gcp service account", "IDENTITY", re.compile(r"[A-Za-z0-9._%-]+@[a-z0-9-]+\.iam\.gserviceaccount\.com")),
     # Google Drive/Docs file IDs start with "1" and run 33+ chars. The lookahead
     # requiring an uppercase letter is what stops this matching a lowercase hex
-    # digest — VENDORED.sha256 holds sha256 hashes, and one beginning with "1"
+    # digest. VENDORED.sha256 holds sha256 hashes, and one beginning with "1"
     # tripped this rule as a "leaked doc ID". Tightened rather than exempting the
     # file, because the same collision would recur on any commit hash or checksum
     # anywhere in the repo.
@@ -81,7 +81,7 @@ RULES: list[tuple[str, str, re.Pattern[str]]] = [
     # Deliberately NOT in this list: the publisher's own company name. It belongs
     # in LICENSE, NOTICE, and the README byline, and blocking it there was this
     # rule's first false positive. The distinction the list encodes is author vs
-    # client — publishing your own name is the opposite of a leak. Internal
+    # client. Publishing your own name is the opposite of a leak. Internal
     # product and system codenames stay banned even though they're also "ours",
     # because those name commercial work the public repo has no business
     # describing.

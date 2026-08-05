@@ -1,4 +1,4 @@
-# Workspace root. This is NOT a package — it exists to hold shared tool config
+# Workspace root. This is NOT a package. It exists to hold shared tool config
 # so every package lints and tests the same way. Packages live in packages/*.
 
 [tool.ruff]
@@ -23,7 +23,7 @@ addopts = "-q"
 
 [tool.ruff.lint.per-file-ignores]
 # Long lines in tools/ are load-bearing, not sloppy:
-#   promote.py holds exact-match substitution literals — wrapping one changes
+#   promote.py holds exact-match substitution literals. Wrapping one changes
 #   what it matches, and a substitution that silently stops matching is how a
 #   private reference ships to a public package.
 #   check_brand_leak.py holds detection regexes, same reasoning.
