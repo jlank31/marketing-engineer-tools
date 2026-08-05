@@ -15,7 +15,7 @@ Four findings, each answering a question you can't ask of one file:
     stat blocks       which statistics you keep recycling together
     worn phrases      which distinctive phrasings recur across many pieces
 
-All of it is descriptive. Nothing here is a pass/fail — repetition is sometimes
+All of it is descriptive. Nothing here is a pass/fail. Repetition is sometimes
 deliberate (a positioning line you *want* consistent) and sometimes a rut. The
 tool finds it; you decide which is which.
 """
@@ -62,7 +62,7 @@ def drop_sections(text: str, heading_re: str) -> str:
 
     Real archives carry production metadata in-band: cover-image prompts, schema
     dumps, changelogs. Those are templates, so they repeat across every file and
-    swamp the genuine prose findings — on a 10-document archive an image-prompt
+    swamp the genuine prose findings. On a 10-document archive an image-prompt
     boilerplate block produced three of the top verbatim hits.
     """
     if not heading_re:
@@ -89,7 +89,7 @@ def load_corpus(
     """Read every matching file under `path` into {label: text}.
 
     Labels are paths relative to `path`, so output stays readable when the
-    directory is deep. Unreadable files are skipped rather than fatal — a corpus
+    directory is deep. Unreadable files are skipped rather than fatal. A corpus
     scan over someone's blog folder shouldn't die on one bad encoding.
 
     `exclude_section` is a regex matched against markdown headings; matching

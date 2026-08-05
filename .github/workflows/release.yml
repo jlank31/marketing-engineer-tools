@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
-      id-token: write   # PyPI Trusted Publishing (OIDC) — no long-lived token in a public repo
+      id-token: write   # PyPI Trusted Publishing (OIDC), no long-lived token in a public repo
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

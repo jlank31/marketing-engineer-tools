@@ -205,7 +205,7 @@ def test_opening_line_skips_metadata_and_headings():
     """Regression: openers were compared as metadata, not prose.
 
     Every file starting "SEO TITLE: ..." reported as echoing every other one,
-    because the compared openers were all the same metadata key — six false pairs
+    because the compared openers were all the same metadata key: six false pairs
     out of six on a real archive.
     """
     from robot_check.repetition import opening_line

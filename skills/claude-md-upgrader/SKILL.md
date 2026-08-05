@@ -27,7 +27,7 @@ Open with 1-3 sentences: what the project IS, its current state, and who it's fo
 
 **Purpose:** [1-sentence description of what this project does and who it serves.]
 
-[Optional: current state — "Pre-launch", "Live at URL", "200 pages published", etc.]
+[Optional: current state, e.g. "Pre-launch", "Live at URL", "200 pages published"]
 
 Key docs: `path/to/important/file` | `path/to/other/file`
 ```
@@ -47,11 +47,11 @@ This is the behavioral core. It tells Claude HOW to work, not just WHAT to work 
 Default to action. Do the thing, then report what you did.
 
 - **After completing any significant task**, end with:
-  1. **[Context-specific result summary]** — what was done, metrics, outcomes
-  2. **[Context-specific quality check]** — flag issues, drift, or weak output
-  3. **Next actions I can do right now** — be specific, not generic
+  1. **[Context-specific result summary]**: what was done, metrics, outcomes
+  2. **[Context-specific quality check]**: flag issues, drift, or weak output
+  3. **Next actions I can do right now**: be specific, not generic
   - 3-5 bullets max. No fluff.
-- **Proactively [context-specific improvement behavior]** — don't wait to be asked
+- **Proactively [context-specific improvement behavior]**. Don't wait to be asked
 - If you notice something [context-specific problem], **flag it and offer to fix it**
 - **Never end at a dead end.** Always surface the next step.
 
@@ -66,7 +66,7 @@ Default to action. Do the thing, then report what you did.
   - **Audit/report tool:** "Audit summary" + "Report quality flags" + "Deck generation"
   - **API/backend:** "What was built" + "Test results" + "Integration points"
 - The proactive behavior line must match what matters most for this project type
-- Never use generic phrases like "Let me know if you need anything" — always be specific
+- Never use generic phrases like "Let me know if you need anything". Always be specific
 
 ### 3. Content Quality Rules
 
@@ -78,7 +78,7 @@ Non-negotiable rules for any generated output. Adapt to the project's output typ
 
 Non-negotiable for all [output type]:
 
-- **No em dashes** in [context] — strong AI writing tell
+- **No em dashes** in [context]. Strong AI writing tell
 - **No unprovable superlatives** ("industry-leading", "#1", "best-in-class")
 - [Project-specific rules based on output type]
 ```
@@ -123,13 +123,13 @@ When you correct an error I make, propose a new rule to add to this file that wo
 2. **Read 2-3 project files** to understand what the project does and what its outputs are
 3. **Identify the project type** (website, pipeline, content system, API, CLI tool, etc.)
 4. **Draft the upgraded CLAUDE.md** applying all 5 sections above
-5. **Preserve all existing rules** that aren't redundant — never delete domain-specific knowledge
+5. **Preserve all existing rules** that aren't redundant. Never delete domain-specific knowledge
 6. **Show the user the result** and flag any rules you're unsure about
 
 ## Anti-Patterns to Avoid
 
-- Do NOT add generic "How to Operate" text — every line must be customized to the project
+- Do NOT add generic "How to Operate" text. Every line must be customized to the project
 - Do NOT remove existing technical rules, key commands, or architecture docs
 - Do NOT add Content Quality Rules that don't apply (e.g., copy rules for a pure backend project)
-- Do NOT make the file longer than ~80 lines unless the project genuinely needs it — concise is better
-- Do NOT add the "Let me take more off your plate" exact phrasing — adapt the concept to the project's natural workflow
+- Do NOT make the file longer than ~80 lines unless the project genuinely needs it. Concise is better
+- Do NOT add the "Let me take more off your plate" exact phrasing. Adapt the concept to the project's natural workflow

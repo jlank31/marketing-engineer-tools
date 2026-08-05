@@ -14,7 +14,7 @@ description: >
 # Project Cheat Sheet Generator
 
 Encodes a project's architecture, conventions, and gotchas into a reusable skill so
-every future session starts with full context pre-loaded — no re-reading, no re-asking.
+every future session starts with full context pre-loaded: no re-reading, no re-asking.
 
 ## When to Use
 - Claude repeatedly reads the same files across sessions to derive context it should already have
@@ -30,10 +30,10 @@ every future session starts with full context pre-loaded — no re-reading, no r
 Ask (or infer from context): which project? Confirm the root path.
 
 ### Step 2: Gather Context
-Read in this order — stop when you have enough to fill all sections:
+Read in this order, stopping when you have enough to fill all sections:
 
-1. `[project]/CLAUDE.md` — conventions, rules, stack, model routing
-2. `[project]/README.md` — overview if exists
+1. `[project]/CLAUDE.md`: conventions, rules, stack, model routing
+2. `[project]/README.md`: overview if exists
 3. For Python agent projects: all files in `agents/`, `workflows/`, `utils/`, `prompts/`
 4. For Astro/frontend projects: `src/components/`, `src/content/`, `src/styles/global.css`, `src/pages/`
 5. For knowledge/strategy projects: `INDEX.md`, top-level `.md` files
@@ -81,7 +81,7 @@ description: >
   or component names]", "[main workflow keywords]", "[key file names]".
 ---
 
-# [Project Name] — Project Context
+# [Project Name]: Project Context
 
 [One sentence: what this project does and why it exists.]
 
@@ -91,16 +91,16 @@ description: >
 
 ---
 
-## [Section based on type — see Step 3 above]
+## [Section based on type, see Step 3 above]
 
-[Fill in extracted content. Be specific — generic descriptions defeat the purpose.]
+[Fill in extracted content. Be specific. Generic descriptions defeat the purpose.]
 
 ---
 
 ## Known Gotchas
 - [Concrete thing Claude should never re-ask or re-derive]
-- [e.g., "Never delete data/processed.json — it tracks pipeline state"]
-- [e.g., "mdx fences (```mdx) break the Astro build — use plain content blocks"]
+- [e.g., "Never delete data/processed.json, it tracks pipeline state"]
+- [e.g., "mdx fences (```mdx) break the Astro build, use plain content blocks"]
 ```
 
 ### Step 5: Confirm
@@ -116,7 +116,7 @@ Report:
 
 A good cheat sheet makes a cold session feel like a warm one. Test it mentally:
 if someone opened a new Claude Code session, mentioned the project name, and asked
-a routine task — would they need to read any files first? If yes, the cheat sheet is
+a routine task. Would they need to read any files first? If yes, the cheat sheet is
 missing something.
 
 Bad cheat sheet: "The project has agents that do research and email writing."

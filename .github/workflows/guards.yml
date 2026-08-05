@@ -32,6 +32,6 @@ jobs:
       - name: verify recorded hashes
         run: |
           if ! shasum -a 256 -c packages/robot-check/VENDORED.sha256; then
-            echo "::error::A mirrored file was edited directly. These come from a private upstream; see CONTRIBUTING.md. The patch is still welcome — it gets replayed upstream and lands on the next sync."
+            echo "::error::A mirrored file was edited directly. These come from a private upstream; see CONTRIBUTING.md. The patch is still welcome. It gets replayed upstream and lands on the next sync."
             exit 1
           fi

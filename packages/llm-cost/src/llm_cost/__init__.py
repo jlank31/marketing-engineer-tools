@@ -1,4 +1,4 @@
-"""llm-cost — know what a run costs, and stop it when it blows the budget.
+"""llm-cost: know what a run costs, and stop it when it blows the budget.
 
     from llm_cost import TrackedClient, tracked_run
 

@@ -2,10 +2,10 @@
 
 Three pieces, in order of how often they save you:
 
-1. `response_text()` — get the text out of a response, correctly.
-2. `safe_parse_json()` — get structured data out, tolerating the ways models
+1. `response_text()`: get the text out of a response, correctly.
+2. `safe_parse_json()`: get structured data out, tolerating the ways models
    wrap it.
-3. `@with_healing` — retry with backoff, and optionally escalate to a model to
+3. `@with_healing`: retry with backoff, and optionally escalate to a model to
    diagnose what went wrong.
 
 THE PART WORTH READING TWICE is the instrumentation, not the healing. The

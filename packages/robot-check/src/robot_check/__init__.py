@@ -1,4 +1,4 @@
-"""robot-check — find the lines that make copy read as machine-written.
+"""robot-check: find the lines that make copy read as machine-written.
 
 Two layers, deliberately separate:
 

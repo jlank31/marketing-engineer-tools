@@ -25,7 +25,7 @@ leak:  ## scan the whole repo for credentials, identifiers, and client refs
 mirror:  ## verify mirrored files match their recorded hashes
 	@shasum -a 256 -c packages/robot-check/VENDORED.sha256 \
 		|| (echo ""; echo "  A mirrored file was edited directly."; \
-		    echo "  Mirrored files come from a private upstream — see CONTRIBUTING.md."; \
+		    echo "  Mirrored files come from a private upstream. See CONTRIBUTING.md."; \
 		    echo "  Apply the change upstream, then: make promote"; exit 1)
 
 check: lint test leak mirror  ## everything CI runs

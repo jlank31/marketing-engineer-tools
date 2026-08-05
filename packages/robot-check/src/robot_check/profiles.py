@@ -32,7 +32,7 @@ PRESETS: dict[str, Profile] = {
     # Long-form article or blog post meant to be found and cited. The citation
     # floor is the one rule here with real evidence behind it: pages that name
     # concrete sources get cited by AI search far more often than pages that
-    # gesture at authority. Length is NOT a ranking factor — do not read the
+    # gesture at authority. Length is NOT a ranking factor. Do not read the
     # 400-word exemption as a target.
     "blog": Profile(
         name="blog",
@@ -76,8 +76,8 @@ def from_dict(data: dict, base: str = "generic") -> Profile:
     """Build a Profile from a dict, filling gaps from a preset.
 
     Unknown keys raise rather than being ignored. A typo in a config file that
-    silently disables a detector is the failure mode worth being loud about —
-    you would never see it, and you would believe you were covered.
+    silently disables a detector is the failure mode worth being loud about.
+    You would never see it, and you would believe you were covered.
     """
     start = PRESETS.get(data.get("preset", base), PRESETS["generic"])
     fields = set(to_dict(start))

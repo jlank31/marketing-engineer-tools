@@ -19,7 +19,7 @@ mkdir -p "$DEST"
 for dir in "${skills[@]}"; do
   name="$(basename "$dir")"
   if [ -e "$DEST/$name" ]; then
-    echo "  skip     $name (already at $DEST/$name — remove it first to replace)"
+    echo "  skip     $name (already at $DEST/$name, remove it first to replace)"
     continue
   fi
   cp -R "$dir" "$DEST/$name"

@@ -1,4 +1,4 @@
-"""editor-rules — learn an editor's style from what they actually change.
+"""editor-rules: learn an editor's style from what they actually change.
 
     from editor_rules import compute, render_prompt_block
 

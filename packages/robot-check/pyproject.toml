@@ -14,7 +14,7 @@ keywords = ["ai-detection", "content-quality", "linter", "writing", "editorial",
 
 # Deliberately empty, and it stays that way. "Drops into any repo with no
 # dependency graph" is the whole product claim, and CI enforces it with an AST
-# walk over every module — including imports inside function bodies, which is
+# walk over every module, including imports inside function bodies, which is
 # how the one historical violation slipped in.
 dependencies = []
 

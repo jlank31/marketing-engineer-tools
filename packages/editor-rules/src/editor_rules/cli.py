@@ -1,4 +1,4 @@
-"""editor-rules — turn a pile of redlines into rules your AI prompt can use.
+"""editor-rules: turn a pile of redlines into rules your AI prompt can use.
 
     editor-rules edits.jsonl
     editor-rules edits.csv --min-count 2 --prompt-block > rules.md

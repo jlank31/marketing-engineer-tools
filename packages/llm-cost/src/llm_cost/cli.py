@@ -1,4 +1,4 @@
-"""llm-cost — price a call from the terminal, or check the price table.
+"""llm-cost: price a call from the terminal, or check the price table.
 
     llm-cost price claude-opus-5 --in 50000 --out 2000 --cache-read 40000
     llm-cost models

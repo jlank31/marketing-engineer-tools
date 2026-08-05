@@ -11,13 +11,13 @@ verbatim in 2 blogs, the same 5-stat block pasted across 4+ pieces, and
 
 This module is the deterministic counterpart: pure text functions that compare
 a NEW draft against a corpus of recent output. Deliberately separate from
-an idea-dedup gate — that compares angle TITLES at planning time;
+an idea-dedup gate, which compares angle TITLES at planning time;
 this one compares finished BODY COPY. Different granularity,
 different job (shingle overlap vs distinctive-bigram topics), so a shared
 implementation would serve neither well.
 
 No dependencies at all, so this imports cleanly from a CLI, a QC gate, or
-a notebook. All findings are SOFT by design — they surface candidates for a
+a notebook. All findings are SOFT by design: they surface candidates for a
 human to judge, and none of them should ever block a publish on their own.
 """
 
