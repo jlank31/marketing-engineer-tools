@@ -10,7 +10,7 @@ jobs:
     name: no credentials, identifiers, or client references
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: python tools/check_brand_leak.py
@@ -19,7 +19,7 @@ jobs:
     name: gitleaks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with: { fetch-depth: 0 }
       - uses: gitleaks/gitleaks-action@v2
         env: { GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
@@ -28,7 +28,7 @@ jobs:
     name: mirrored files unmodified
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: verify recorded hashes
         run: |
           if ! shasum -a 256 -c packages/robot-check/VENDORED.sha256; then
