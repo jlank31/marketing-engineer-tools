@@ -126,7 +126,12 @@ def _scan(args) -> int:
         for label, rows in (("issue", r["issues"]), ("warning", r["warnings"]),
                             ("repetition", r["repetition"])):
             for row in rows:
-                print(f"    [{label}] {row}")
+                # Rows arrive prefixed "FAIL: " / "WARN: " from the detector,
+                # which reads as a stutter next to the [issue] / [warning]
+                # label. Strip it here only: --json still emits the raw string,
+                # so anything parsing the output is unaffected.
+                text = row[6:] if row.startswith(("FAIL: ", "WARN: ")) else row
+                print(f"    [{label}] {text}")
 
     if not reports:
         return max(worst, 2)

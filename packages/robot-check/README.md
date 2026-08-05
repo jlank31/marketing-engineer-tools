@@ -10,14 +10,21 @@ robot-check scan draft.md
 ```
 
 ```
-FAIL  draft.md  (3 issues, 2 warnings)
-    [issue] reversal pattern: "It's not a tooling problem. It's a distance problem."
-    [issue] hollow opener: "In today's fast-paced landscape"
-    [issue] banned phrase: "that's the whole game"
-    [warning] paragraph rhythm variance 0.12 (floor 0.30). Every paragraph is
-              nearly the same length, which reads as generated
-    [warning] 1 distinct citation domain (floor 3)
+FAIL  draft.md  (9 issues, 0 warnings)
+    [issue] Banned AI word 'landscape'. Replace with a natural alternative.
+    [issue] Banned AI word 'fast-paced'. Replace with a natural alternative.
+    [issue] Contrast/reversal pattern: "'s not a tooling problem. It's". Write the direct claim.
+    [issue] Hollow opener: "In today's fast-paced landscape".
+    [issue] Vague quantifier: "fast-paced landscape".
+    [issue] Empty intensifier: "actually" (x3).
+    [issue] Spelled-out percent (use %): "52 percent".
+    [issue] Bland filler phrase: "in today's fast-paced".
+    [issue] Manufactured rapport: "You're not alone".
 ```
+
+That is real output, pasted unedited. Warnings look the same with a
+`[warning]` label: paragraph rhythm variance, sentence-length ceilings, and
+citation-domain counts all report there instead.
 
 ## How this differs from an AI detector
 

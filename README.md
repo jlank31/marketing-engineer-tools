@@ -46,15 +46,18 @@ pip install "llm-cost[anthropic]"   # real API cost tracking + a budget cap
 pip install editor-rules            # learn an editor's style from their edits
 ```
 
-You'll get a list like this, quoting your own lines back at you:
+You'll get a list like this, quoting your own lines back at you. This is real
+output, not a mockup:
 
 ```
-FAIL  your-draft.md  (3 issues, 2 warnings)
-    [issue] Hollow opener: "In today's fast-paced landscape"
-    [issue] Manufactured rapport: "You're not alone"
-    [issue] Empty intensifier: "actually" (x9)
-    [warning] Low sentence-length variance (0.12, target >0.30) - every
-              paragraph is nearly the same length, which reads as generated
+FAIL  draft.md  (9 issues, 0 warnings)
+    [issue] Banned AI word 'landscape'. Replace with a natural alternative.
+    [issue] Contrast/reversal pattern: "'s not a tooling problem. It's". Write the direct claim.
+    [issue] Hollow opener: "In today's fast-paced landscape".
+    [issue] Vague quantifier: "fast-paced landscape".
+    [issue] Empty intensifier: "actually" (x3).
+    [issue] Spelled-out percent (use %): "52 percent".
+    [issue] Manufactured rapport: "You're not alone".
 ```
 
 **Three ways people use it:**
