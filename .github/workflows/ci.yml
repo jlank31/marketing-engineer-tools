@@ -18,13 +18,13 @@ jobs:
         with: { python-version: "${{ matrix.python }}" }
       # Installed WITHOUT extras and with no env vars set, because "works on a
       # stranger's machine with nothing configured" is the actual contract.
-      - run: pip install ./packages/prose-tells ./packages/llm-run-guard ./packages/edit-digest pytest
+      - run: pip install ./packages/robot-check ./packages/llm-cost ./packages/editor-rules pytest
       - run: python -m pytest packages/*/tests -q
       - name: CLI smoke test in a bare environment
         run: |
-          env -i "$(which prose-tells)" --version
+          env -i "$(which robot-check)" --version
           printf "In today's fast-paced landscape, brands must adapt.\n" > /tmp/s.md
-          env -i "$(which prose-tells)" scan /tmp/s.md && exit 1 || test $? -eq 1
+          env -i "$(which robot-check)" scan /tmp/s.md && exit 1 || test $? -eq 1
 
   lint:
     runs-on: ubuntu-latest

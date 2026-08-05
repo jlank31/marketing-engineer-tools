@@ -4,7 +4,7 @@ Short version: bug reports are welcome, price-table updates are actively wanted,
 
 ## Some files are mirrored from a private upstream
 
-`packages/prose-tells/src/prose_tells/content_quality.py` and `repetition.py` are maintained in a private repository and copied here. `packages/prose-tells/VENDORED.sha256` records their hashes, and CI fails if either is edited in place.
+`packages/robot-check/src/robot_check/content_quality.py` and `repetition.py` are maintained in a private repository and copied here. `packages/robot-check/VENDORED.sha256` records their hashes, and CI fails if either is edited in place.
 
 This isn't gatekeeping. Those detectors run against live client content in a production pipeline, and that pipeline has to be able to fix a rule the same night something slips through — without waiting on a release here. Making the private copy authoritative is what buys that.
 
@@ -14,7 +14,7 @@ Everything else in the repo — the CLI, profiles, tests, tooling, docs, skills 
 
 ## What gets accepted
 
-**Actively wanted:** price-table corrections in `llm-run-guard` (when it lands). A published price table goes stale within months, and a cost tool reporting stale numbers is worse than no cost tool. These are trivial to review and keep the package honest.
+**Actively wanted:** price-table corrections in `llm-cost` (when it lands). A published price table goes stale within months, and a cost tool reporting stale numbers is worse than no cost tool. These are trivial to review and keep the package honest.
 
 **Welcome:** false positives. A detector that fires on good writing is a real defect — these are deliberately tuned to under-report, so a rule that cries wolf undermines the whole set. Send the exact text.
 

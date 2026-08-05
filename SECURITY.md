@@ -10,8 +10,8 @@ Best effort acknowledgement within a week. This is a small project maintained on
 
 Every package here is deliberately small in surface area:
 
-- **`prose-tells`** has zero dependencies, makes no network calls, opens no sockets, and executes nothing it reads. It compiles regexes and reads text files you point it at. The realistic risks are a catastrophically backtracking pattern on adversarial input (report it — that's a real bug) and the ordinary risk of pointing any file reader at a path you didn't mean to.
-- **`llm-run-guard`** (from Aug 31) talks to the Anthropic API and reads `ANTHROPIC_API_KEY` from the environment. It never logs the key. It does record token counts and costs.
+- **`robot-check`** has zero dependencies, makes no network calls, opens no sockets, and executes nothing it reads. It compiles regexes and reads text files you point it at. The realistic risks are a catastrophically backtracking pattern on adversarial input (report it — that's a real bug) and the ordinary risk of pointing any file reader at a path you didn't mean to.
+- **`llm-cost`** (from Aug 31) talks to the Anthropic API and reads `ANTHROPIC_API_KEY` from the environment. It never logs the key. It does record token counts and costs.
 
 Nothing here stores credentials, phones home, or collects telemetry. There is no analytics in any package and there won't be.
 

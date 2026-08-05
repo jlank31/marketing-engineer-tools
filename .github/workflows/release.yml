@@ -1,6 +1,6 @@
 name: release
 
-# Tag format: <package>-v<semver>   e.g.  prose-tells-v0.1.0
+# Tag format: <package>-v<semver>   e.g.  robot-check-v0.1.0
 # Only the tagged package is built and published.
 on:
   push:

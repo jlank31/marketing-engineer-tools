@@ -37,7 +37,7 @@ I firmly believe we should all be getting smarter together
 
 If it's useful, a like and a share help other people find it
 
-Here's some info on the first one, prose-tells
+Here's some info on the first one, robot-check
 
 AI detectors tell you "87% likely AI." That's useless to an editor. It doesn't tell you which line to change.
 

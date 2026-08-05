@@ -26,6 +26,6 @@ body:
     id: version
     attributes:
       label: Version
-      description: "`prose-tells --version`, and your Python version"
+      description: "`robot-check --version`, and your Python version"
     validations:
       required: true

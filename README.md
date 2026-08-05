@@ -31,15 +31,15 @@ You don't need to write code to use most of this. If you can copy one line into 
 **The 30-second version.** Install it, point it at something you wrote, read what comes back:
 
 ```bash
-pip install prose-tells
-prose-tells scan your-draft.md
+pip install robot-check
+robot-check scan your-draft.md
 ```
 
 The other two packages:
 
 ```bash
-pip install "llm-run-guard[anthropic]"   # real API cost tracking + a budget cap
-pip install edit-digest                  # learn an editor's style from their edits
+pip install "llm-cost[anthropic]"   # real API cost tracking + a budget cap
+pip install editor-rules                  # learn an editor's style from their edits
 ```
 
 You'll get a list like this, quoting your own lines back at you:
@@ -84,24 +84,24 @@ expect a writeup on the thinking behind each one.
 
 | # | Date | Tool | Status | What it does, and when you'd use it |
 |---|---|---|---|---|
-| 1 | Aug 5 | [**prose-tells**](packages/prose-tells) | **Ready** | A spell-checker for AI writing tells. Reads a draft and names the exact lines that read as machine-written: the "it's not X, it's Y" reversal, em dashes, stock openers, 25 overused phrases. It also catches things no other tool looks at, like whether every paragraph is the same length (a robot rhythm) or whether an article cites 3 real sources or just gestures at authority. **Use it** on anything before it goes live. |
+| 1 | Aug 5 | [**robot-check**](packages/robot-check) | **Ready** | A spell-checker for AI writing tells. Reads a draft and names the exact lines that read as machine-written: the "it's not X, it's Y" reversal, em dashes, stock openers, 25 overused phrases. It also catches things no other tool looks at, like whether every paragraph is the same length (a robot rhythm) or whether an article cites 3 real sources or just gestures at authority. **Use it** on anything before it goes live. |
 | 2 | Aug 12 | **Landing Page Copy Tournament** | **Ready** | Rewrites your landing page 8 different ways, then puts all 9 versions (yours competes as the 10th) in front of a 5-person judging panel: a skeptical CFO, a tired founder scrolling at midnight, a competitor, your ideal customer, and a conversion copywriter. **Use it** before a redesign, or to settle an argument about a headline. If your current page wins, it says so instead of inventing a rewrite. |
-| 3 | Aug 19 | **prose-tells `fix`** | **Ready** | Same tool, but it edits instead of complaining. Strips em dashes, contracts "do not" to "don't", turns "52 percent" into "52%", and cuts empty words, repairing the punctuation around each cut so the sentence still reads. **Use it** as a final cleanup pass, or wire it into your repo so every content update gets checked automatically. |
-| 4 | Aug 26 | **CLAUDE.md Upgrader** + **Project Overlay** | **Ready** | Two tools for anyone using an AI coding assistant. One rewrites your project's instruction file so the AI behaves like a teammate. The other writes a permanent cheat sheet so it stops re-learning your project every session. **Use them** if you've ever answered the same question from your AI twice. |
-| 5 | Sep 2 | [**llm-run-guard**](packages/llm-run-guard) | **Ready** | A spend meter and an emergency brake for anyone building on the Claude API. Most cost tracking is quietly wrong: it misses cached tokens, misses web search charges, and reports $0 for any model it doesn't recognize, which silently switches off your budget cap. **Use it** if you've ever been surprised by an API bill. |
-| 6 | Sep 9 | **llm-run-guard: self-healing** | **Ready** | The layer that keeps an AI pipeline running while you sleep. Retries failures, repairs malformed AI output, and escalates to a smarter model as a last resort. It also counts whether those expensive rescue calls were worth it, which most people never check. **Use it** on anything that runs unattended. |
-| 7 | Sep 16 | [**edit-digest**](packages/edit-digest) | **Ready** | Learns your editor's style from their edits. Feed it before-and-after pairs and it tells you the pattern: *Write "brands", not "vendors" (7x). Cut "very" (5x), the editor removes it every time.* Paste that into your AI prompt and the drafts stop repeating the mistakes. Costs nothing to run, no API call. **Use it** monthly and watch your drafts need less editing each cycle. |
+| 3 | Aug 19 | **robot-check `fix`** | **Ready** | Same tool, but it edits instead of complaining. Strips em dashes, contracts "do not" to "don't", turns "52 percent" into "52%", and cuts empty words, repairing the punctuation around each cut so the sentence still reads. **Use it** as a final cleanup pass, or wire it into your repo so every content update gets checked automatically. |
+| 4 | Aug 26 | **CLAUDE.md Upgrader** + **Project Cheat Sheet** | **Ready** | Two tools for anyone using an AI coding assistant. One rewrites your project's instruction file so the AI behaves like a teammate. The other writes a permanent cheat sheet so it stops re-learning your project every session. **Use them** if you've ever answered the same question from your AI twice. |
+| 5 | Sep 2 | [**llm-cost**](packages/llm-cost) | **Ready** | A spend meter and an emergency brake for anyone building on the Claude API. Most cost tracking is quietly wrong: it misses cached tokens, misses web search charges, and reports $0 for any model it doesn't recognize, which silently switches off your budget cap. **Use it** if you've ever been surprised by an API bill. |
+| 6 | Sep 9 | **llm-cost: self-healing** | **Ready** | The layer that keeps an AI pipeline running while you sleep. Retries failures, repairs malformed AI output, and escalates to a smarter model as a last resort. It also counts whether those expensive rescue calls were worth it, which most people never check. **Use it** on anything that runs unattended. |
+| 7 | Sep 16 | [**editor-rules**](packages/editor-rules) | **Ready** | Learns your editor's style from their edits. Feed it before-and-after pairs and it tells you the pattern: *Write "brands", not "vendors" (7x). Cut "very" (5x), the editor removes it every time.* Paste that into your AI prompt and the drafts stop repeating the mistakes. Costs nothing to run, no API call. **Use it** monthly and watch your drafts need less editing each cycle. |
 | 8 | Sep 23 | [**The AEO Retractions**](docs/essays/aeo-retractions.md) | **Ready** | An essay retracting 3 SEO rules I taught clients and now know are wrong, with every remaining rule labeled Confirmed, Plausible, or Folklore. **Use it** to stop doing 3 things that don't work, and to set honest expectations before someone quotes you a traffic number that doesn't survive checking. |
 
 ### Bonus tools
 
-These don't get their own launch week. `corpus` ships inside prose-tells from day
+These don't get their own launch week. `corpus` ships inside robot-check from day
 one, so if you install drop 1 you already have it. The rest land whenever they're
 done.
 
 | Tool | Status | What it does, and when you'd use it |
 |---|---|---|
-| **prose-tells `corpus`** | **Ready** | Reads your *entire* published archive at once and shows where you've started repeating yourself: the anecdote you've told word for word 3 times, the same 5 statistics recycled across 4 posts, the same opening move in 5 of your last 6 articles. Each post looks fine alone. The sameness only shows up across the whole library. **Use it** once a quarter. Expect it to be uncomfortable. |
+| **robot-check `corpus`** | **Ready** | Reads your *entire* published archive at once and shows where you've started repeating yourself: the anecdote you've told word for word 3 times, the same 5 statistics recycled across 4 posts, the same opening move in 5 of your last 6 articles. Each post looks fine alone. The sameness only shows up across the whole library. **Use it** once a quarter. Expect it to be uncomfortable. |
 | **Pitch Deck Builder** | Building | Builds an investor, partner, or client deck slide by slide with speaker notes, blending 5 proven narrative frameworks and adapting the mix to who's in the room. Output pastes straight into Gamma or Google Slides. **Use it** when you're staring at slide 1. |
 | **Marketing Folklore Registry** | Building | A running list of marketing statistics that get repeated everywhere and are provably wrong, plus a checker that flags them in your draft. **Use it** before your next strategy deck, so you don't cite something that falls apart when someone checks. |
 | **Email Deliverability Checklist** | Building | A one-page pre-send checklist covering the technical setup that decides whether your campaign lands in the inbox or in spam. **Use it** before every send. The most boring thing here and probably the most useful. |
@@ -124,7 +124,7 @@ That's in here, with the fix and the test.
 
 ### Yes, this README fails its own checker
 
-Run `prose-tells scan README.md` and you'll get about 10 hits. Almost all of them are quotes.
+Run `robot-check scan README.md` and you'll get about 10 hits. Almost all of them are quotes.
 
 This page demonstrates the tells it detects, so it contains them: "In today's fast-paced landscape" and "You're not alone" appear in the sample output above, and the "It's not X. It's Y." story quotes that pattern 3 times on purpose.
 

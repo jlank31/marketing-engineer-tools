@@ -7,7 +7,7 @@ Repo: `github.com/jlank31/marketing-engineer-tools`
 
 ---
 
-## 1. prose-tells (scan)
+## 1. robot-check (scan)
 
 **One-liner**
 A spell-checker for AI writing tells. It names the exact line that reads as machine-written and tells you why.
@@ -17,8 +17,8 @@ Anyone publishing AI-assisted copy who's had the nagging feeling some of it read
 
 **How to use it**
 ```
-pip install prose-tells
-prose-tells scan draft.md
+pip install robot-check
+robot-check scan draft.md
 ```
 Point it at any file. Get a numbered list back with your own lines quoted. Run it as the last pass before publishing, or send the output to a writer instead of marking up their doc.
 
@@ -32,7 +32,7 @@ It also catches things no other tool looks at. Whether every paragraph is the sa
 
 ---
 
-## 2. prose-tells corpus
+## 2. robot-check corpus
 
 **One-liner**
 Reads your entire published archive at once and shows you where you've started repeating yourself.
@@ -42,7 +42,7 @@ Anyone with 10+ published pieces. The more you've written, the more uncomfortabl
 
 **How to use it**
 ```
-prose-tells corpus ./blog/
+robot-check corpus ./blog/
 ```
 Point it at a folder. Once a quarter is about right.
 
@@ -56,7 +56,7 @@ Some repetition is your positioning working. Some is a rut. The tool finds it; y
 
 ---
 
-## 3. prose-tells fix
+## 3. robot-check fix
 
 **One-liner**
 The same tool, but it edits instead of complaining.
@@ -66,7 +66,7 @@ Anyone who's run a writing checker, agreed with it, and then had to make 30 smal
 
 **How to use it**
 ```python
-from prose_tells import strip_em_dashes, apply_contractions
+from robot_check import strip_em_dashes, apply_contractions
 ```
 Four deterministic rewrites: em dashes stripped, "do not" contracted, "52 percent" rendered as "52%", empty intensifiers cut.
 
@@ -125,7 +125,7 @@ The assistant stops asking questions it should already know the answer to.
 
 ---
 
-## 6. Project Overlay
+## 6. Project Cheat Sheet
 
 **One-liner**
 Reads your codebase once and writes a permanent cheat sheet so the AI stops re-deriving it every session.
@@ -144,7 +144,7 @@ Immediate and slightly embarrassing. You see how much of your week went to expla
 
 ---
 
-## 7. llm-run-guard (cost tracking)
+## 7. llm-cost (cost tracking)
 
 **One-liner**
 A spend meter for the Claude API that counts the things most trackers miss, plus a circuit breaker that kills a run before it kills your budget.
@@ -154,7 +154,7 @@ Anyone building on the Anthropic API. Especially anyone who's been surprised by 
 
 **How to use it**
 ```
-pip install "llm-run-guard[anthropic]"
+pip install "llm-cost[anthropic]"
 ```
 One line changes: `Anthropic()` becomes `TrackedClient()`. Everything else stays.
 
@@ -177,7 +177,7 @@ The cap. Cost reporting tells you about yesterday. A cap stops a runaway retry l
 
 ---
 
-## 8. llm-run-guard (self-healing)
+## 8. llm-cost (self-healing)
 
 **One-liner**
 The layer that keeps an AI pipeline running unattended, plus the counters that tell you whether its expensive rescue path is worth paying for.
@@ -201,7 +201,7 @@ Retries skip errors where retrying is pointless (TypeError, auth failures, credi
 
 ---
 
-## 9. edit-digest
+## 9. editor-rules
 
 **One-liner**
 Learns your editor's style from what they actually change, and hands you rules you can paste into a prompt.
@@ -211,8 +211,8 @@ Anyone whose drafts get redlined by the same person or the same brand standard, 
 
 **How to use it**
 ```
-pip install edit-digest
-edit-digest edits.jsonl --prompt-block >> PROMPT.md
+pip install editor-rules
+editor-rules edits.jsonl --prompt-block >> PROMPT.md
 ```
 Feed it before-and-after pairs. Any file with a before and an after column.
 

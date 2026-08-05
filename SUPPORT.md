@@ -22,5 +22,5 @@ That's the most useful report you can send, so it's worth making it land. Includ
 If you only want it quieter for your own work, `Profile` exists for that:
 
 ```bash
-prose-tells profile --preset blog > profile.json   # edit, then --profile profile.json
+robot-check profile --preset blog > profile.json   # edit, then --profile profile.json
 ```
