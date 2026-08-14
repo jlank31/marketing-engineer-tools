@@ -100,13 +100,68 @@ Keep existing process rules. If the file doesn't have them, add the baseline:
 
 ```markdown
 ## Process Rules
-- Before touching more than 3 files: describe your plan and wait for approval.
-- When requirements are ambiguous: ask one focused clarifying question before proceeding.
 - After making changes: state what changed and flag anything that could break.
 - Never run destructive commands without explicit confirmation.
+- [Project-specific gate, e.g. "Run `npm run build` before pushing"]
 ```
 
-Add project-specific rules as needed (e.g., "Run `npm run build` before pushing").
+**Gate on blast radius, not diff size.** An earlier version of this skill told you to add
+*"Before touching more than 3 files: describe your plan and wait for approval."* Do not add
+that rule, and remove it when you find it. It keys on the wrong thing. A twenty-file
+refactor on a branch is one `git checkout` from undone; a one-word edit to live hero copy
+reaches every visitor. That rule stops the first and waves through the second.
+
+Instead, read the project's deploy config, CI workflows, and package scripts, then write a
+concrete list of what actually reaches an audience **in this project**. Name real paths and
+real commands:
+
+```markdown
+**Ask first only for these.** Everything else: do it, then report.
+- **Reaches an audience.** [The real deploy trigger, publish flag, or send command here]
+- **Costs money.** [Real spend surfaces, if any]
+- **Cannot be undone.** Force-push, history rewrite, dropping a table, deleting anything
+  not in git, rotating a credential.
+```
+
+Drop *"When requirements are ambiguous, ask one focused clarifying question"* too, and
+replace it with the rule below, which is the same instinct pointed the right way.
+
+### 4b. The Four Behavioral Rules
+
+Add these verbatim. They are project-independent, which is why they belong in the baseline
+while the ask-list above never does.
+
+```markdown
+## Done means done
+Not half done. Not done except for the part you decided to skip. Not a report about how it
+will be done. Five things asked means five things delivered. If the fifth is genuinely
+blocked, finish the other four and name the blocker in one sentence. The specific blocker,
+not "this needs more investigation."
+
+## Act. Don't ask.
+Reversible and cheap? Do it, then tell me. A question costs me more than a re-run costs
+you. Something is broken? Fix it. Reporting a problem you could have fixed turns your work
+into my to-do list. Ask first only for the list above.
+
+## A question is a question
+When I ask a question, answer it. Do not implement it. "Should we use X?" is not "migrate
+everything to X." When in doubt, assume it is a question. Answer first. Act when I say go.
+
+## Speed
+Parallelize independent work; batch tool calls in one message. Delegate routine work
+(search, bulk edits, verification) to a cheaper model, hard reasoning to a stronger one.
+Keep working while subagents run. Never let two subagents touch the same files. Speed never
+costs quality: same rigor, same verification, same "done means done."
+```
+
+**Add a "done means done" table** listing, per surface in this project, what finishing
+actually requires. Find the real gates by reading the test, lint, build and CI config. If a
+checker exists, running it and reading its output is part of done.
+
+**Check for contradictions before you finish.** If the file now says both "act, don't ask"
+and something that makes Claude stop and ask based on size, delete the second one. A rules
+file that contradicts itself resolves differently every session, and that inconsistency is
+what users experience as drift. This is the single highest-value edit in an upgrade.
 
 ### 5. Self-Improvement Footer
 
@@ -121,10 +176,17 @@ When you correct an error I make, propose a new rule to add to this file that wo
 
 1. **Read the existing CLAUDE.md** (if it exists)
 2. **Read 2-3 project files** to understand what the project does and what its outputs are
-3. **Identify the project type** (website, pipeline, content system, API, CLI tool, etc.)
-4. **Draft the upgraded CLAUDE.md** applying all 5 sections above
-5. **Preserve all existing rules** that aren't redundant. Never delete domain-specific knowledge
-6. **Show the user the result** and flag any rules you're unsure about
+3. **Read the deploy config, CI workflows, and package scripts.** This is what tells you
+   what actually reaches an audience here, which is the only way to write §4's ask-list
+   honestly. Guessing it produces a rule nobody follows.
+4. **Identify the project type** (website, pipeline, content system, API, CLI tool, etc.)
+5. **Draft the upgraded CLAUDE.md** applying all sections above
+6. **Preserve all existing rules** that aren't redundant. Never delete domain-specific knowledge
+7. **Hunt for contradictions and delete them.** Any rule that makes Claude stop and ask
+   based on how big a change is now fights §4b. Only one can survive
+8. **Report the byte count before and after.** Every token in this file is a token not
+   spent on the user's actual request. If it grew, say what earned the space
+9. **Show the user the result** and flag any rules you're unsure about
 
 ## Anti-Patterns to Avoid
 
@@ -133,3 +195,7 @@ When you correct an error I make, propose a new rule to add to this file that wo
 - Do NOT add Content Quality Rules that don't apply (e.g., copy rules for a pure backend project)
 - Do NOT make the file longer than ~80 lines unless the project genuinely needs it. Concise is better
 - Do NOT add the "Let me take more off your plate" exact phrasing. Adapt the concept to the project's natural workflow
+- Do NOT gate on diff size. No "more than N files" rule, in any wording. Gate on what cannot be undone
+- Do NOT leave two rules that disagree. A file saying both "act, don't ask" and "wait for approval before X files" is worse than a file with neither, because the model picks a side per session and the user calls it drift
+- Do NOT copy another project's ask-list. It is the one part of this pattern that is never portable
+- Do NOT pad the file with documentation that `ls`, a README, or the code already says. Rules change behavior; descriptions just cost context
